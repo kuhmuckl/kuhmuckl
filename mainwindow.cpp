@@ -17,3 +17,10 @@ void MainWindow::on_actionBeenden_triggered()
 {
     close();
 }
+
+void MainWindow::on_actionStartseite_triggered()
+{
+    if(session)
+        delete session;
+    session = new Session();
+}

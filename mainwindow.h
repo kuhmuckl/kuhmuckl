@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "Session.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,8 +19,11 @@ public:
 private slots:
     void on_actionBeenden_triggered();
 
+    void on_actionStartseite_triggered();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow  *ui;
+    Session*        session;
 };
 
 #endif // MAINWINDOW_H
