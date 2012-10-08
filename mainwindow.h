@@ -17,9 +17,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionBeenden_triggered();
 
-    void on_actionStartseite_triggered();
+    void on_actionQuit_triggered();
+
+    void on_actionReset_triggered();
+
+    void on_pb_FarmsSelectMarked_clicked();
+
+    void on_pb_SelectMarked_clicked();
 
 private:
     Ui::MainWindow  *ui;
