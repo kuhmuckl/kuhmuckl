@@ -26,6 +26,16 @@ private slots:
 
     void on_pb_SelectMarked_clicked();
 
+    void on_pb_FarmsSearchAndMark_clicked();
+
+    void on_pb_CowsSearchAndMark_clicked();
+
+    void on_pb_SaveChanges_clicked();
+
+    void on_pb_CreatDiagram_clicked();
+
+    void on_pb_AddProperty_clicked();
+
 private:
     Ui::MainWindow  *ui;
     Session*        session;

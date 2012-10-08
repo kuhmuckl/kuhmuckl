@@ -19,20 +19,27 @@
 class Session
 {
 private:
-    QVector<Animal> animals;
-    QVector<Farm>   farms;
-    Diagram         diagram;    //Maybe a QSet of?
-    Report          report;     //Maybe a QSet of?
+    QVector<Animal*> animals;
+    QVector<Farm*>   farms;
+    unsigned int     activeAnimal;      //Only index is stored
+    unsigned int     activeFarm;        //Only index is stored
+    Diagram*         diagram;           //Maybe a QSet of?
+    Report*          report;            //Maybe a QSet of?
 public:
-    Session();//constructor
-    Session(const Session& session);//copy constructor
-    ~Session();//destructor
+    Session();                          //constructor
+    Session(const Session& session);    //copy constructor
+    ~Session();                         //destructor
 
-    Diagram  getDiagram();
-    Report   getReport();
+    Diagram*    getDiagram();
+    Report*     getReport();
 
-    Animal   getAnimal(unsigned int index);
-    Farm     getFarm(unsigned int index);
+    Animal*     getAnimal(unsigned int index);
+    Animal*     getActiveAnimal();
+    Farm*       getFarm(unsigned int index);
+    Farm*       getActiveFarm();
+
+    void        setActiveAnimal(unsigned int index);
+    void        setActiveFarm(unsigned int index);
 };
 
 #endif // SESSION_H
