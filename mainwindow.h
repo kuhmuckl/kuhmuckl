@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include <QSqlTableModel>
+
 #include "Session.h"
 
 namespace Ui {

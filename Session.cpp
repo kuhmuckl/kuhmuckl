@@ -1,12 +1,17 @@
 #include "Session.h"
 
+#include <iostream>
+
 Session::Session()
 {
-
+    diagram = new Diagram();
+    report = new Report();
+    dataBaseManager = new DataBaseManager();
 }
 
 Session::Session(const Session &session)
 {
+    // TODO: Update for Pointer
     this->animals = session.animals;
     this->farms   = session.farms;
     this->diagram = session.diagram;
@@ -23,6 +28,16 @@ Session::~Session()
         if(farms[i])
             delete farms[i];
     farms.clear();
+
+    delete report;
+    delete diagram;
+    delete dataBaseManager;
+
+}
+
+QSqlDatabase Session::getSQLDatabase()
+{
+    return dataBaseManager->getSQLDatabase();
 }
 
 Diagram* Session::getDiagram()

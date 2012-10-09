@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/**********************************************************
+  Initialization and Finalization
+**********************************************************/
 
 /** Form constructor
   All important initializations happen right here.
@@ -10,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    session = new Session();
+    session = 0; //Initialization on reset
     //TODO: Initialize menue entries (Recent used stuff)
     on_actionReset_triggered();
 }
@@ -54,6 +57,11 @@ void MainWindow::on_actionReset_triggered()
     ui->tab_CowView->setEnabled(false);
     ui->tab_Diagram->setEnabled(false);
     ui->tab_Report->setEnabled(false);
+
+    QSqlTableModel* model = new QSqlTableModel(this,session->getSQLDatabase());
+    ui->tv_Farms->setModel(model);
+    model->setTable("Farms");
+    model->select();
 }
 
 

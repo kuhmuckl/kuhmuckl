@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 TARGET = kuhmuckl
 TEMPLATE = app
@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     Cow.cpp \
     Farm.cpp \
     Report.cpp \
-    Diagram.cpp
+    Diagram.cpp \
+    DataBaseManager.cpp
 
 HEADERS  += mainwindow.h \
     Session.h \
@@ -25,6 +26,7 @@ HEADERS  += mainwindow.h \
     Cow.h \
     Farm.h \
     Report.h \
-    Diagram.h
+    Diagram.h \
+    DataBaseManager.h
 
 FORMS    += mainwindow.ui
