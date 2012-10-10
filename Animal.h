@@ -1,24 +1,21 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 
-#include "QVector"
-#include "QVariant"
-#include "QString"
+#include "Entity.h"
+
 /**
   This class contains all properties and functions that
   are useful for future animals -besides cows.
   It only describes one animal, not the set of animals.
   */
-class Animal
+class Animal : Entity
 {
-    // Do we need a storage over time?
-    QVector<QString>    propertyName;
-    QVector<QVariant>   propertyValue;
 public:
-    Animal();                           //constructor
-    ~Animal();                          //destructor
-    void addProperty(QString name, QVariant value = 0);
-    bool deletePropertyByName(QString name);         //returns true if successful
+    Animal();                                       //constructor
+    ~Animal();                                      //destructor
+
+    bool exportAsTextFile(QString fileName);
+    bool exportAsPDF(QString fileName);
 };
 
 #endif // ANIMAL_H

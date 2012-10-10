@@ -19,7 +19,8 @@ DataBaseManager::DataBaseManager()
 
 DataBaseManager::DataBaseManager(const DataBaseManager& dataBaseManager)
 {
-
+    this->db.cloneDatabase(dataBaseManager.db, dataBaseManager.db.connectionName());
+    query = new QSqlQuery(db);
 }
 
 DataBaseManager::~DataBaseManager()

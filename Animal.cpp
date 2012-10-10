@@ -4,16 +4,22 @@ Animal::Animal()
 {
 }
 
-Animal::~Animal()
-{
-}
-
-void Animal::addProperty(QString name, QVariant value)
-{
+Animal::~Animal(){
 
 }
 
-bool Animal::deletePropertyByName(QString name)
+bool Animal::exportAsTextFile(QString fileName)
 {
-    return false;
+    bool success = true;
+    //Saving as txt goes here
+    //use getAllPropertyNames()
+    return success;
+}
+
+bool Animal::exportAsPDF(QString fileName)
+{
+    bool success = true;
+    //Converting to and Saving as pdf goes here
+    //use getAllPropertyNames()
+    return success;
 }

@@ -395,6 +395,42 @@
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_CowTable">
+           <attribute name="title">
+            <string>Ausgewählte Tabelle</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
+            <item>
+             <widget class="QTableView" name="tableView"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_SaveCowTableChanges">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Änderungen speichern</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_ExportCowTable">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Exportieren</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
           <widget class="QWidget" name="tab_CowView">
            <attribute name="title">
             <string>Ausgewählte Kuh</string>
@@ -417,7 +453,7 @@
              <widget class="QTableView" name="tv_CowView"/>
             </item>
             <item>
-             <widget class="QPushButton" name="pb_SaveChanges">
+             <widget class="QPushButton" name="pb_SaveCowChanges">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -426,69 +462,6 @@
               </property>
               <property name="text">
                <string>Änderungen speichern</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_CowTable">
-           <attribute name="title">
-            <string>Ausgewählte Tabelle</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_14">
-            <item>
-             <widget class="QTableWidget" name="tableWidget"/>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Gewählte Eigenschaft löschen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QFormLayout" name="fl_ReportProperties_3">
-              <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-              </property>
-              <item row="0" column="1">
-               <widget class="QLabel" name="lab_Property_3">
-                <property name="text">
-                 <string>Eigenschaft</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="cob_Property_3"/>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLabel" name="lab_FromTable_3">
-                <property name="text">
-                 <string>aus Tabelle ...</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QComboBox" name="cob_FromTable_3"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pb_AddProperty_3">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Eigenschaft hinzufügen</string>
               </property>
              </widget>
             </item>
@@ -944,6 +917,9 @@
    </property>
   </action>
   <action name="actionReadFromFile">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Aus Datei einlesen</string>
    </property>

@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     Farm.cpp \
     Report.cpp \
     Diagram.cpp \
-    DataBaseManager.cpp
+    DataBaseManager.cpp \
+    Entity.cpp
 
 HEADERS  += mainwindow.h \
     Session.h \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.h \
     Farm.h \
     Report.h \
     Diagram.h \
-    DataBaseManager.h
+    DataBaseManager.h \
+    Entity.h
 
 FORMS    += mainwindow.ui

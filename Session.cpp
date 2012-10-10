@@ -79,3 +79,10 @@ void Session::setActiveFarm(unsigned int index)
 {
     this->activeFarm = index;
 }
+
+bool Session::readNewDataFromFile(QString fileName)
+{
+    bool success = true;
+    //ParseInputs and alter Database
+    return success;
+}

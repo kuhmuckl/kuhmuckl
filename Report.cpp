@@ -9,17 +9,17 @@ Report::~Report()
 
 }
 
-void Report::addProperty(QString name, QVariant value)
+bool Report::exportAsTextFile(QString fileName)
 {
-
+    bool success = true;
+    //Exporting as txt goes here
+    return success;
 }
 
-bool Report::deletePropertyByName(QString name)
+bool Report::exportAsPDF(QString fileName)
 {
-    return false;
+    bool success = true;
+    //Exporting as PDF goes here
+    return success;
 }
 
-void Report::saveLayout(QString fileName)
-{
-
-}

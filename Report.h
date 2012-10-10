@@ -1,26 +1,22 @@
 #ifndef REPORT_H
 #define REPORT_H
 
-#include "QVector"
-#include "QVariant"
-#include "QString"
+#include "Entity.h"
 
 /**
   This class manages the dynamic creation and storage of reports as well
   as the possibility to save a report's layout.
   Maybe we can outsource the layout as another class?
   */
-class Report
+class Report : Entity
 {
-private:
-    QVector<QString>    propertyName;
-    QVector<QVariant>   propertyValue;
 public:
     Report();       //constructor
     ~Report();      //destructor
-    void addProperty(QString name, QVariant value = 0);
-    bool deletePropertyByName(QString name);         //returns true if successful
-    void saveLayout(QString fileName);               //saves Property nmaes to file
+
+
+    bool exportAsTextFile(QString fileName);
+    bool exportAsPDF(QString fileName);
 };
 
 #endif // REPORT_H

@@ -1,7 +1,9 @@
 #ifndef FARM_H
 #define FARM_H
 
-class Farm
+#include "Entity.h"
+
+class Farm : Entity
 {
 public:
     Farm();//constructor
