@@ -23,3 +23,15 @@ bool Report::exportAsPDF(QString fileName)
     return success;
 }
 
+bool Report::exportAsDOC(QString fileName)
+{
+    bool success = true;
+    //Exporting as DOC goes here
+    return success;
+}
+
+void Report::print()
+{
+
+}
+

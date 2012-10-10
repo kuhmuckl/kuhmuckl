@@ -8,3 +8,8 @@ Cow::~Cow()
 {
 
 }
+
+void Cow::print()
+{
+
+}

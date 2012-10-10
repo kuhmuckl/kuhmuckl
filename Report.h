@@ -8,7 +8,7 @@
   as the possibility to save a report's layout.
   Maybe we can outsource the layout as another class?
   */
-class Report : Entity
+class Report : public Entity
 {
 public:
     Report();       //constructor
@@ -17,6 +17,9 @@ public:
 
     bool exportAsTextFile(QString fileName);
     bool exportAsPDF(QString fileName);
+    bool exportAsDOC(QString fileName);
+
+    virtual void print();
 };
 
 #endif // REPORT_H

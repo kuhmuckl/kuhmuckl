@@ -33,7 +33,7 @@ MainWindow::~MainWindow()
 **********************************************************/
 
 /** Quit button
-  nuff said.
+  'nuf said.
 */
 void MainWindow::on_actionQuit_triggered()
 {
@@ -87,7 +87,7 @@ void MainWindow::on_pb_FarmsSelectMarked_clicked()
 */
 void MainWindow::on_pb_FarmsSearchAndMark_clicked()
 {
-
+    // Search function goes here
 }
 
 /**********************************************************
@@ -109,7 +109,7 @@ void MainWindow::on_pb_SelectMarked_clicked()
 */
 void MainWindow::on_pb_CowsSearchAndMark_clicked()
 {
-
+    //Search function goes here
 }
 
 
@@ -121,7 +121,7 @@ void MainWindow::on_pb_CowsSearchAndMark_clicked()
 */
 void MainWindow::on_pb_SaveChanges_clicked()
 {
-
+    //Aply changes via QSqlTableView ...
 }
 
 
@@ -135,7 +135,7 @@ about single cow, xAxis and yAxis
 */
 void MainWindow::on_pb_CreatDiagram_clicked()
 {
-
+    //calculating axis, draw things and create models
 }
 
 
@@ -148,9 +148,162 @@ void MainWindow::on_pb_CreatDiagram_clicked()
 */
 void MainWindow::on_pb_AddProperty_clicked()
 {
+    //read property from combobox and add it using
+    //session->getReport()->addProperty(...);
+}
 
+/**********************************************************
+  All actions triggered by Menuebar
+**********************************************************/
+
+void MainWindow::on_actionReadFromFile_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->readNewDataFromFile(filename);
+}
+
+void MainWindow::on_action_Report_DOC_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getReport()->exportAsDOC(filename);
+}
+
+void MainWindow::on_action_Report_PDF_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getReport()->exportAsPDF(filename);
+}
+
+void MainWindow::on_action_Report_TextFile_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getReport()->exportAsTextFile(filename);
+}
+
+void MainWindow::on_actionPrintReport_triggered()
+{
+    session->getReport()->print();
+}
+
+void MainWindow::on_action_Diagram_PDF_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getDiagram()->exportAsPDF(filename);
+}
+
+void MainWindow::on_action_Diagram_SVG_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getDiagram()->exportAsSVG(filename);
+}
+
+void MainWindow::on_action_Diagram_JPEG_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getDiagram()->exportAsJPG(filename);
+}
+
+void MainWindow::on_actionPrintDiagram_triggered()
+{
+    session->getDiagram()->print();
+}
+
+void MainWindow::on_actionLoadDiagramTemplate_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getOpenFileName();
+    session->getDiagram()->print();
+}
+
+void MainWindow::on_actionSaveDiagramTemplate_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getDiagram()->saveLayoutToFile(filename);
+}
+
+void MainWindow::on_actionNewDiagramTemplate_triggered()
+{
+    //reset diagram axis
+}
+
+void MainWindow::on_actionNewReportTemplate_triggered()
+{
+    // reset report Values .. destroy and create new?
+}
+
+void MainWindow::on_actionSaveReportTemplate_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getSaveFileName();
+    session->getReport()->saveLayoutToFile(filename);
+}
+
+void MainWindow::on_actionLoadReportTemplate_triggered()
+{
+    QFileDialog dialog;
+    QString filename = dialog.getOpenFileName();
+    session->getReport()->loadLayoutFromFile(filename);
+}
+
+void MainWindow::on_action_ToSaveMyTemplates_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToReadNewData_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToPrint_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_AreTabsDisabled_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToCreateReports_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToCreateDiagrams_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToCheckCowDetails_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_action_ToChoseAFarm_triggered()
+{
+    //Simple QMessagebox should be enough
+}
+
+void MainWindow::on_actionTeam_triggered()
+{
+    //Simple QMessagebox should be enough, mybe including our logo
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    //Simple QMessagebox should be enough
 }
 
 /**********************************************************
   Actions that haven't been sorted into the upper sections!!
 **********************************************************/
+

@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     Report.cpp \
     Diagram.cpp \
     DataBaseManager.cpp \
-    Entity.cpp
+    Entity.cpp \
+    Printable.cpp
 
 HEADERS  += mainwindow.h \
     Session.h \
@@ -29,6 +30,7 @@ HEADERS  += mainwindow.h \
     Report.h \
     Diagram.h \
     DataBaseManager.h \
-    Entity.h
+    Entity.h \
+    Printable.h
 
 FORMS    += mainwindow.ui

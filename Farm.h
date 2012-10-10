@@ -3,11 +3,13 @@
 
 #include "Entity.h"
 
-class Farm : Entity
+class Farm : public Entity
 {
 public:
     Farm();//constructor
     ~Farm();//destructor
+
+    virtual void print();
 };
 
 #endif // FARM_H

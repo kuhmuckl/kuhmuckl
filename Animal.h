@@ -8,7 +8,7 @@
   are useful for future animals -besides cows.
   It only describes one animal, not the set of animals.
   */
-class Animal : Entity
+class Animal : public Entity //abstract class! don't try to instaciate
 {
 public:
     Animal();                                       //constructor
@@ -16,6 +16,8 @@ public:
 
     bool exportAsTextFile(QString fileName);
     bool exportAsPDF(QString fileName);
+
+    virtual void print() = 0;
 };
 
 #endif // ANIMAL_H

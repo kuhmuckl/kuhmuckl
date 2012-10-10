@@ -29,23 +29,11 @@ void Diagram::setYAxisStep(float yAxisStep){
 }
 
 void Diagram::addValue(float xValue, float yValue){
-    values.push_back(QPair<float, float>(xValue, yValue));
+    values[xValue] = yValue;
 }
 
-QVector<float> Diagram::getYValues(float xValue){
-    QVector<float> result;
-    for(int i = 0; i < values.size();i++)
-        if(values[i].first == xValue)
-            result.push_back(values[i].second);
-    return result;
-}
-
-QVector<float> Diagram::getXValues(float yValue){
-    QVector<float> result;
-    for(int i = 0; i < values.size();i++)
-        if(values[i].second == yValue)
-            result.push_back(values[i].first);
-    return result;
+float Diagram::getYValues(float xValue){
+    return values[xValue];
 }
 
 void Diagram::calculateAxisSteps()
@@ -83,4 +71,24 @@ bool Diagram::exportAsPDF(QString fileName)
     //Convert Data to PDF
     //Store SVG to Filename
     return success;
+}
+
+bool Diagram::saveLayoutToFile(QString fileName)
+{
+    bool success = false;
+    //Save Axis to Filename
+    return success;
+}
+
+bool Diagram::loadLayoutFromFile(QString fileName)
+{
+    bool success = false;
+    //load last Axis configuration
+    //maybe source?
+    return success;
+}
+
+void Diagram::print()
+{
+
 }
