@@ -50,7 +50,6 @@ void MainWindow::on_actionReset_triggered()
     if(session)
         delete session;
     session = new Session();
-    ui->menuDataSet->setEnabled(false);
     ui->menuDiagram->setEnabled(false);
     ui->menuReport->setEnabled(false);
     ui->tab_Cows->setEnabled(false);
@@ -159,7 +158,7 @@ void MainWindow::on_pb_AddProperty_clicked()
 void MainWindow::on_actionReadFromFile_triggered()
 {
     QFileDialog dialog;
-    QString filename = dialog.getSaveFileName();
+    QString filename = dialog.getOpenFileName();
     session->readNewDataFromFile(filename);
 }
 

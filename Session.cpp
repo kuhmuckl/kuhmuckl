@@ -84,5 +84,9 @@ bool Session::readNewDataFromFile(QString fileName)
 {
     bool success = true;
     //ParseInputs and alter Database
+    QMessageBox msgBox;
+    QString text = "CLEMENS";
+    msgBox.setText(QString("Clemens").at(1));
+    msgBox.exec();
     return success;
 }

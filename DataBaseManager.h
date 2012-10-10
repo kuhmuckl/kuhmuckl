@@ -27,6 +27,7 @@ public:
     QSqlDatabase    getSQLDatabase();
     void            executeQuery(const QString& aQuery);
     void            createTable(const QString& tableName, QVector<QString> attributes);
+    bool            importFromFile(QString filename);
 };
 
 #endif // DATABASEMANAGER_H

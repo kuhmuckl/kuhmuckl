@@ -82,7 +82,11 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="ed_FarmName"/>
+           <widget class="QLineEdit" name="ed_FarmName">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="lab_concerning">
@@ -737,7 +741,7 @@
    </widget>
    <widget class="QMenu" name="menuDataSet">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Datensätze</string>
