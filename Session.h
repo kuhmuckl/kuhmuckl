@@ -44,7 +44,7 @@ public:
     Farm*           getFarm(unsigned int index);
     Farm*           getActiveFarm();
 
-    bool            readNewDataFromFile(QString fileName);
+    bool            readNewDataFromFile(QString fileName);  //returns true on success
     void            setActiveAnimal(unsigned int index);
     void            setActiveFarm(unsigned int index);
 };
