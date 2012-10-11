@@ -57,10 +57,15 @@ void MainWindow::on_actionReset_triggered()
     ui->tab_Diagram->setEnabled(false);
     ui->tab_Report->setEnabled(false);
 
-    QSqlTableModel* model = new QSqlTableModel(this,session->getSQLDatabase());
-    ui->tv_Farms->setModel(model);
-    model->setTable("Farms");
-    model->select();
+    QSqlTableModel* farmModel = new QSqlTableModel(this,session->getSQLDatabase());
+    ui->tv_Farms->setModel(farmModel);
+    farmModel->setTable("Farms");
+    farmModel->select();
+
+    QSqlTableModel* cowModel = new QSqlTableModel(this, session->getSQLDatabase());
+    ui->tv_Cows->setModel(cowModel);
+    cowModel->setTable("cows");
+    cowModel->select();
 }
 
 

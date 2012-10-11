@@ -82,11 +82,10 @@ void Session::setActiveFarm(unsigned int index)
 
 bool Session::readNewDataFromFile(QString fileName)
 {
-    bool success = true;
+    bool success = false;
     //ParseInputs and alter Database
-    QMessageBox msgBox;
-    QString text = "CLEMENS";
-    msgBox.setText(QString("Clemens").at(1));
-    msgBox.exec();
+
+    success = dataBaseManager->importFromFile(fileName);
+
     return success;
 }
