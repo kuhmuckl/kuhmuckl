@@ -8,6 +8,11 @@
 
 #include "Session.h"
 
+/**
+  Mainly auto-generated Headerfile to manage
+  events and global variables.
+*/
+
 namespace Ui {
 class MainWindow;
 }

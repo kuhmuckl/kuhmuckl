@@ -11,11 +11,20 @@ Session::Session()
 
 Session::Session(const Session &session)
 {
-    // TODO: Update for Pointer
-    this->animals = session.animals;
-    this->farms   = session.farms;
-    this->diagram = session.diagram;
-    this->report  = session.report;
+    //ToDo: Clear for type
+    //animals.clear();
+    //animals.reserve(session.animals.size());
+    //foreach(Animal* animal, session.animals)
+    //    animals.push_back(new Animal(*animal));
+
+    farms.clear();
+    farms.reserve(session.farms.size());
+    foreach(Farm* farm, session.farms)
+        farms.push_back(new Farm(*farm));
+
+
+    this->diagram = new Diagram(*session.diagram);
+    this->report  = new Report(*session.report);
 }
 
 Session::~Session()

@@ -3,6 +3,11 @@
 
 #include <QString>
 
+/**
+  Abstract Base class for every Object that shall support
+  being printed and stroing layouts.
+*/
+
 class Printable
 {
 public:
