@@ -138,7 +138,7 @@ bool DataBaseManager::importFromFile(QString fileName)
                     QString num = line.mid(i,vLen[k]).replace(" ","");
                     if (num != "")
                         cow[line.mid(eventNbLen,vLen[0])].push_back(
-                            QString::number((num).toFloat()/pow(10,scale[k])
+                            QString::number((num).toFloat()/pow((float)10,scale[k])
                             )
                         );
                     else
