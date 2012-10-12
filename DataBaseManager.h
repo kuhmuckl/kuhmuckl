@@ -20,14 +20,22 @@ protected:
     void             initializeFirst();
 
 public:
-    DataBaseManager();
-    DataBaseManager(const DataBaseManager& dataBaseManager);
-    ~DataBaseManager();
+    DataBaseManager();                                          //constructor
+    DataBaseManager(const DataBaseManager& dataBaseManager);    //copy constructor
+    ~DataBaseManager();                                         //destructor
 
     QSqlDatabase    getSQLDatabase();
+    //returns the opened Database
+
     void            executeQuery(const QString& aQuery);
+    //executes a given statement concerning the database
+
     void            createTable(const QString& tableName, QVector<QString> attributes);
-    bool         importFromFile(QString fileName);
+    //creates a new table in the opened Database using attribut format of SQLITE
+
+    bool            importFromFile(QString filename);
+    //reads the given file, parses its information and store them in the database.
+    //Returns true if successful
 };
 
 #endif // DATABASEMANAGER_H

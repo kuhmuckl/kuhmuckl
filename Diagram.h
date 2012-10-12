@@ -8,7 +8,7 @@
 
 /**
   Diagram class to save and load diagram layouts
-  and displaying them.
+  and exporting them.
   */
 
 class Diagram : public Printable
@@ -31,6 +31,10 @@ public:
 
     void            addValue(float xValue, float yValue);
     void            calculateAxisSteps();
+
+    // The following functions try to convert and save the diagram as
+    // a different data type and store them beneath the given file name.
+    // Return true on success.
     bool            exportAsSVG(QString fileName);
     bool            exportAsJPG(QString fileName);
     bool            exportAsBMP(QString fileName);

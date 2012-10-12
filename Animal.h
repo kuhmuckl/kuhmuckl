@@ -4,7 +4,7 @@
 #include "Entity.h"
 
 /**
-  This class contains all properties and functions that
+  This abstract class contains all properties and functions that
   are useful for future animals -besides cows.
   It only describes one animal, not the set of animals.
   */
@@ -17,7 +17,7 @@ public:
     bool exportAsTextFile(QString fileName);
     bool exportAsPDF(QString fileName);
 
-    virtual void print() = 0;
+    virtual void print() = 0;                       //pure virtual function makes a class abstract
 };
 
 #endif // ANIMAL_H
