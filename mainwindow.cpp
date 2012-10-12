@@ -62,10 +62,11 @@ void MainWindow::on_actionReset_triggered()
     farmModel->setTable("Farms");
     farmModel->select();
 
-    QSqlTableModel* cowModel = new QSqlTableModel(this, session->getSQLDatabase());
+    QSqlQueryModel* cowModel = new QSqlTableModel(this, session->getSQLDatabase());
     ui->tv_Cows->setModel(cowModel);
-    cowModel->setTable("cows");
-    cowModel->select();
+    QSqlQuery query(session->getSQLDatabase());
+    query.exec("SELECT * FROM cows");
+    cowModel->setQuery(query);
 }
 
 
