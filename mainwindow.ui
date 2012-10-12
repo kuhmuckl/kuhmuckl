@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
@@ -144,7 +144,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidgetCows">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_Cows_Home">
            <attribute name="title">
@@ -367,7 +367,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
-            <widget class="QListView" name="listView_2"/>
+            <widget class="QListWidget" name="lw_Property"/>
            </item>
            <item>
             <widget class="QLabel" name="lab_Property">
@@ -377,10 +377,102 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="cob_Property"/>
+            <widget class="QComboBox" name="cob_Property">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <item>
+              <property name="text">
+               <string>Lebensnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Kuhname</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Kuhnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Laktationstage</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Laktationsnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Milch in kg</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fett in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Eiweiß in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Harnstoff in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Zellen</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Milch (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fett (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Eiweiß (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Messdatum</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Prüfnummer</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_AddProperty_2">
+            <widget class="QCheckBox" name="cB_diff">
+             <property name="text">
+              <string>Differenz</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_AddProperty">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -388,11 +480,25 @@
               </size>
              </property>
              <property name="text">
-              <string>Eigenschaften hinzufügen</string>
+              <string>Eigenschaft hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_DelProperty">
+             <property name="text">
+              <string>Eigenschaft löschen</string>
              </property>
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sb_saveTable">
+          <property name="text">
+           <string>Speichern</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -405,7 +511,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
-            <widget class="QListView" name="listView"/>
+            <widget class="QListWidget" name="lw_Filter"/>
            </item>
            <item>
             <widget class="QLabel" name="lab_Property_2">
@@ -424,10 +530,86 @@
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
-               <widget class="QComboBox" name="cob_Property_2"/>
+               <widget class="QComboBox" name="cob_FilterName">
+                <item>
+                 <property name="text">
+                  <string>Lebensnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kuhname</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kuhnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Laktationstage</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Laktationsnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milch in kg</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fett in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Eiweiß in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Harnstoff in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Zellen</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milch (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fett (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Eiweiß (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Messdatum</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Prüfnummer</string>
+                 </property>
+                </item>
+               </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="cob_FilterOperator">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -473,13 +655,13 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_2"/>
+               <widget class="QLineEdit" name="le_FilterValue"/>
               </item>
              </layout>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_AddProperty">
+            <widget class="QPushButton" name="pb_AddAndFilter">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -487,7 +669,21 @@
               </size>
              </property>
              <property name="text">
-              <string>Filter anwenden</string>
+              <string>Filter als &quot;und&quot; hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_AddOrFilter">
+             <property name="text">
+              <string>Filter als &quot;oder&quot; hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_delFilter">
+             <property name="text">
+              <string>Filter löschen</string>
              </property>
             </widget>
            </item>

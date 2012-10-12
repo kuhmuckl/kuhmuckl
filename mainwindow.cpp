@@ -12,10 +12,33 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    colTrans["cowname"].push_back("'Kuhname'");
+    colTrans["lifenb"].push_back("'Lebensnummer'");
+    colTrans["cownb"].push_back("'Kuhnummer'");
+    colTrans["ldays"].push_back("'Lak - Tage'");
+    colTrans["lnb"].push_back("'Lak - Nummer'");
+    colTrans["milk"].push_back("'Milch in kg'");
+    colTrans["fat"].push_back("'Fett in %'");
+    colTrans["protein"].push_back("'Eiweiß in %'");
+    colTrans["harn"].push_back("'Harnstoff in %'");
+    colTrans["cells"].push_back("'Zellen'");
+    colTrans["milkall"].push_back("'Milch (aufgelaufen)'");
+    colTrans["fatall"].push_back("'Fett (aufgelaufen)'");
+    colTrans["proteinall"].push_back("'Eiweiß (aufgelaufen)'");
+    colTrans["farmID"].push_back("'Betriebsnummer'");
+    colTrans["messuredate"].push_back("'Messdatum'");
+    colTrans["messurenb"].push_back("'Prüfnummer'");
+    for(QMap<QString, QString>::const_iterator i = colTrans.begin();i != colTrans.end();i++)
+        cols.append(i.key());
+    order = "lnb";
+    farmID = "345514";
+
     ui->setupUi(this);
     session = 0; //Initialization on reset
     //TODO: Initialize menue entries (Recent used stuff)
     on_actionReset_triggered();
+
+    connect(ui->tv_Cows->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(on_sectionClicked(int)));
 }
 
 /** Form destructor
@@ -62,10 +85,36 @@ void MainWindow::on_actionReset_triggered()
     farmModel->setTable("Farms");
     farmModel->select();
 
+    refresh_cowTable();
+}
+
+void MainWindow::refresh_cowTable()
+{
     QSqlQueryModel* cowModel = new QSqlTableModel(this, session->getSQLDatabase());
     ui->tv_Cows->setModel(cowModel);
     QSqlQuery query(session->getSQLDatabase());
-    query.exec("SELECT * FROM cows");
+
+    QString statement = "SELECT DISTINCT ";
+
+    //add Columns
+    if(cols.length()>0)
+    {
+        for(int i = 0; i < cols.length(); i++)
+            statement.append(cols[i]+" AS "+colTrans[cols[i]]+", ");
+        //Remove last ","
+        statement.remove(statement.length()-2,1);
+    }
+    else
+        statement.append("* ");
+
+    statement.append("FROM cows WHERE farmID ="+farmID+" ");
+
+    for(int i = 0; i != filter.length(); i++)
+        statement.append(filter[i]+" ");
+
+    statement.append("ORDER BY "+order);
+
+    query.exec(statement);
     cowModel->setQuery(query);
 }
 
@@ -155,6 +204,54 @@ void MainWindow::on_pb_AddProperty_clicked()
 {
     //read property from combobox and add it using
     //session->getReport()->addProperty(...);
+    if (!ui->cB_diff->checkState())
+        ui->lw_Property->addItem(new QListWidgetItem(ui->cob_Property->currentText()));
+    else
+        if   ((ui->cob_Property->currentText() != "Lebensnummer")
+            &&(ui->cob_Property->currentText() != "Kuhname")
+            &&(ui->cob_Property->currentText() != "Messdatum")
+            &&(ui->cob_Property->currentText() != "Betrieb"))
+        {
+            ui->lw_Property->addItem(new QListWidgetItem(ui->cob_Property->currentText()+" Diff."));
+        }
+}
+/** Add And Filter Button
+  Adds another property to the existing Report.
+*/
+void MainWindow::on_pb_AddAndFilter_clicked()
+{
+    //read filter from comboboxes and add it
+    if (ui->lw_Filter->count() > 0)
+        ui->lw_Filter->addItem(new QListWidgetItem(
+            "AND "+ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+        ));
+    else
+        ui->lw_Filter->addItem(new QListWidgetItem(
+            ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+        ));
+}
+/** Add Or Filter Button
+  Adds another property to the existing Report.
+*/
+void MainWindow::on_pb_AddOrFilter_clicked()
+{
+    //read filter from comboboxes and add it
+    if (ui->lw_Filter->count() > 0)
+        ui->lw_Filter->addItem(new QListWidgetItem(
+            "OR "+ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+        ));
+    else
+        ui->lw_Filter->addItem(new QListWidgetItem(
+            ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+        ));
+}
+/**
+Clicking on the Cols to sort
+*/
+void MainWindow::on_sectionClicked(int x)
+{
+    order = cols[x];
+    refresh_cowTable();
 }
 
 /**********************************************************

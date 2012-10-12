@@ -162,7 +162,7 @@ bool DataBaseManager::importFromFile(QString fileName)
     query->exec("DROP TABLE cows");
     query->exec("CREATE TABLE cows ("
                 "lifenb nvarchar(20), "
-                "name nvarchar(10), "
+                "cowname nvarchar(10), "
                 "cownb INTEGER, "
                 "ldays INTEGER, "
                 "lnb INTEGER, "
@@ -176,6 +176,7 @@ bool DataBaseManager::importFromFile(QString fileName)
                 "proteinall REAL, "
                 "farmID nvarchar(10), "
                 "messuredate nvarchar(8), "
+                "messurenb INTEGER, "
                 "PRIMARY KEY(lifenb,farmId)"
                 ")");
 
@@ -195,7 +196,8 @@ bool DataBaseManager::importFromFile(QString fileName)
                     ""+iter.value()[20]+","
                     ""+iter.value()[22]+","
                     "'"+farmNb+"',"
-                    "'"+iter.value()[7].right(2)+"."+iter.value()[7].mid(4,2)+"."+iter.value()[7].left(4)+"'"
+                    "'"+iter.value()[7].right(2)+"."+iter.value()[7].mid(4,2)+"."+iter.value()[7].left(4)+"',"
+                    ""+iter.value()[8]+""
                     ")");
 
 

@@ -45,6 +45,14 @@ private slots:
 
     void on_pb_AddProperty_clicked();
 
+    void on_pb_AddAndFilter_clicked();
+
+    void on_pb_AddOrFilter_clicked();
+
+    void refresh_cowTable();
+
+    void on_sectionClicked(int);
+
     void on_actionReadFromFile_triggered();
 
     void on_action_Report_DOC_triggered();
@@ -98,6 +106,11 @@ private slots:
 private:
     Ui::MainWindow  *ui;
     Session*        session;
+    QMap<QString, QString>  colTrans;                               //Name of the cols to shown name
+    QList<QString> cols;
+    QList<QString> filter;
+    QString order;
+    QString farmID;
 };
 
 #endif // MAINWINDOW_H

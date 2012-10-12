@@ -13,8 +13,8 @@
 class DataBaseManager
 {
 private:
-    QSqlDatabase    db;
-    QSqlQuery*      query;
+    QSqlDatabase            db;
+    QSqlQuery*              query;
 
 protected:
     void             initializeFirst();
