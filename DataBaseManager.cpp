@@ -33,7 +33,41 @@ DataBaseManager::~DataBaseManager()
 
 void DataBaseManager::initializeFirst()
 {
-    query->exec("CREATE TABLE Farms(Nr, 'Name')");
+    query->exec("CREATE TABLE IF NOT EXISTS farms("
+                "id nvarchar(10), "
+                "name nvarchar(20), "
+                "lastname nvarchar(20), "
+                "firstname nvarchar(20), "
+                "street nvarchar(100), "
+                "PLZ nvarchar(5), "
+                "city nvarchar(30), "
+                "tel nvarchar(20), "
+                "fax nvarchar(20), "
+                "hint nvarchar(255), "
+                "createdate nvarchar(10), "
+                "changedate nvarchar(10), "
+                "PRIMARY KEY(id))");
+
+    query->exec("CREATE TABLE IF NOT EXISTS cows ("
+                "lifenb nvarchar(20), "
+                "cowname nvarchar(10), "
+                "cownb INTEGER, "
+                "ldays INTEGER, "
+                "lnb INTEGER, "
+                "milk REAL, "
+                "fat REAL, "
+                "protein REAL, "
+                "harn REAL, "
+                "cells INTEGER, "
+                "milkall REAL, "
+                "fatall REAL, "
+                "proteinall REAL, "
+                "farmID nvarchar(10), "
+                "messuredate nvarchar(10), "
+                "messurenb INTEGER, "
+                "PRIMARY KEY(lifenb,farmId),"
+                "FOREIGN KEY(farmID) REFERENCES farms(id)"
+                ")");
 }
 
 QSqlDatabase DataBaseManager::getSQLDatabase()
@@ -159,26 +193,6 @@ bool DataBaseManager::importFromFile(QString fileName)
         }
     }
     MLPData.close();
-    query->exec("DROP TABLE cows");
-    query->exec("CREATE TABLE cows ("
-                "lifenb nvarchar(20), "
-                "cowname nvarchar(10), "
-                "cownb INTEGER, "
-                "ldays INTEGER, "
-                "lnb INTEGER, "
-                "milk REAL, "
-                "fat REAL, "
-                "protein REAL, "
-                "harn REAL, "
-                "cells INTEGER, "
-                "milkall REAL, "
-                "fatall REAL, "
-                "proteinall REAL, "
-                "farmID nvarchar(10), "
-                "messuredate nvarchar(8), "
-                "messurenb INTEGER, "
-                "PRIMARY KEY(lifenb,farmId)"
-                ")");
 
     for(QMap<QString, QList<QString> >::const_iterator iter = cow.begin(); iter!=cow.end();iter++)
         query->exec("INSERT INTO cows VALUES ("
@@ -200,6 +214,8 @@ bool DataBaseManager::importFromFile(QString fileName)
                     ""+iter.value()[8]+""
                     ")");
 
+    query->exec("INSERT INTO farms VALUES ('345514', 'Peters Farm', 'Volkmer', 'Peter', 'Dachstraße 9', '03185', 'Drehnow', '098', '097', '', '10.12.1111', '12.12.12')");
+    query->exec("INSERT INTO farms VALUES ('123456', 'Mamas Farm', 'Müller', 'Trauthild', 'Einsamer Weg 42', '12345', 'Cottbus', '112', '1100', 'alte Frau...', '12.13.14', '01.21.2001')");
 
     return true;
 }
