@@ -44,6 +44,13 @@ public:
     Farm*           getFarm(unsigned int index);
     Farm*           getActiveFarm();
 
+    QMap<QString, QString>  colTrans;                       //Name of the col to the shown name
+    QList<QString>          tableCon;                               //table configurations
+    QList<QString>          cols;
+    QList<QString>          filter;
+    QString                 order;
+    QString                 farmID;
+
     bool            readNewDataFromFile(QString fileName);  //returns true on success
     void            setActiveAnimal(unsigned int index);
     void            setActiveFarm(unsigned int index);

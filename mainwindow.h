@@ -49,6 +49,10 @@ private slots:
 
     void on_pb_AddOrFilter_clicked();
 
+    void refresh_tableCon();
+
+    void refresh_farmTable();
+
     void refresh_cowTable();
 
     void on_sectionClicked(int);
@@ -103,14 +107,13 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void load_Table(int nb);
+
 private:
     Ui::MainWindow  *ui;
     Session*        session;
-    QMap<QString, QString>  colTrans;                               //Name of the cols to shown name
-    QList<QString> cols;
-    QList<QString> filter;
-    QString order;
-    QString farmID;
+    QSqlQueryModel*         cowModel;
+    QSqlQueryModel*         farmModel;
 };
 
 #endif // MAINWINDOW_H

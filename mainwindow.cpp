@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <qfile.h>
+#include <qtextstream.h>
 
 /**********************************************************
   Initialization and Finalization
@@ -12,27 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    colTrans["cowname"].push_back("'Kuhname'");
-    colTrans["lifenb"].push_back("'Lebensnummer'");
-    colTrans["cownb"].push_back("'Kuhnummer'");
-    colTrans["ldays"].push_back("'Lak - Tage'");
-    colTrans["lnb"].push_back("'Lak - Nummer'");
-    colTrans["milk"].push_back("'Milch in kg'");
-    colTrans["fat"].push_back("'Fett in %'");
-    colTrans["protein"].push_back("'Eiweiß in %'");
-    colTrans["harn"].push_back("'Harnstoff in %'");
-    colTrans["cells"].push_back("'Zellen'");
-    colTrans["milkall"].push_back("'Milch (aufgelaufen)'");
-    colTrans["fatall"].push_back("'Fett (aufgelaufen)'");
-    colTrans["proteinall"].push_back("'Eiweiß (aufgelaufen)'");
-    colTrans["farmID"].push_back("'Betriebsnummer'");
-    colTrans["messuredate"].push_back("'Messdatum'");
-    colTrans["messurenb"].push_back("'Prüfnummer'");
-    for(QMap<QString, QString>::const_iterator i = colTrans.begin();i != colTrans.end();i++)
-        cols.append(i.key());
-    order = "lnb";
-    farmID = "345514";
-
     ui->setupUi(this);
     session = 0; //Initialization on reset
     //TODO: Initialize menue entries (Recent used stuff)
@@ -80,42 +61,136 @@ void MainWindow::on_actionReset_triggered()
     ui->tab_Diagram->setEnabled(false);
     ui->tab_Report->setEnabled(false);
 
-    QSqlTableModel* farmModel = new QSqlTableModel(this,session->getSQLDatabase());
+    farmModel = new QSqlTableModel(this, session->getSQLDatabase());
     ui->tv_Farms->setModel(farmModel);
-    farmModel->setTable("Farms");
-    farmModel->select();
 
+    cowModel = new QSqlTableModel(this, session->getSQLDatabase());
+    ui->tv_Cows->setModel(cowModel);
+
+    session->colTrans["cows.lifenb"].push_back("'Lebensnummer'");
+    session->colTrans["cows.cowname"].push_back("'Kuhname'");
+    session->colTrans["cows.cownb"].push_back("'Kuhnummer'");
+    session->colTrans["cows.ldays"].push_back("'Lak - Tage'");
+    session->colTrans["cows.lnb"].push_back("'Lak - Nummer'");
+    session->colTrans["cows.milk"].push_back("'Milch in kg'");
+    session->colTrans["cows.fat"].push_back("'Fett in %'");
+    session->colTrans["cows.protein"].push_back("'Eiweiß in %'");
+    session->colTrans["cows.harn"].push_back("'Harnstoff in %'");
+    session->colTrans["cows.cells"].push_back("'Zellen'");
+    session->colTrans["cows.milkall"].push_back("'Milch (aufgelaufen)'");
+    session->colTrans["cows.fatall"].push_back("'Fett (aufgelaufen)'");
+    session->colTrans["proteinall"].push_back("'Eiweiß (aufgelaufen)'");
+    session->colTrans["cows.farmID"].push_back("'Betriebsnummer'");
+    session->colTrans["cows.messuredate"].push_back("'Messdatum'");
+    session->colTrans["cows.messurenb"].push_back("'Prüfnummer'");
+    session->colTrans["farms.id"].push_back("'Betriebs-Nummer'");
+    session->colTrans["farms.name"].push_back("'Name'");
+    session->colTrans["farms.lastname"].push_back("'Nachname'");
+    session->colTrans["farms.firstname"].push_back("'Vorname'");
+    session->colTrans["farms.street"].push_back("'Straße'");
+    session->colTrans["farms.PLZ"].push_back("'PLZ'");
+    session->colTrans["farms.city"].push_back("'Ort'");
+    session->colTrans["farms.tel"].push_back("'Telefon'");
+    session->colTrans["farms.fax"].push_back("'FAX'");
+    session->colTrans["farms.hint"].push_back("'Bemerkung'");
+    session->colTrans["farms.createdate"].push_back("'Erstellungsdatum'");
+    session->colTrans["farms.changedate"].push_back("'letzte Änderung'");
+
+    refresh_tableCon();
+    load_Table(0);
     refresh_cowTable();
+    refresh_farmTable();
+}
+
+void MainWindow::load_Table(int nb)
+{
+    QFile loadTable(session->tableCon[nb]);
+    loadTable.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream stream(&loadTable);
+
+    session->cols.clear();
+    //first line is the Tablename
+    QString line= stream.readLine();
+    line= stream.readLine();
+    while (line != "#"){
+        session->cols.append(line);
+        line = stream.readLine();
+    }
+    session->filter.clear();
+    line = stream.readLine();
+    while (line != "#"){
+        session->filter.append(line);
+        line = stream.readLine();
+    }
+    line = stream.readLine();
+    if (line != "#")
+        session->order = line;
+
+    loadTable.close();
+}
+
+void MainWindow::refresh_tableCon()
+{
+    QDir dir("");
+
+    QStringList fileFilter;
+    fileFilter.append("*.tbl");
+    QStringList flist = dir.entryList(fileFilter);
+
+    session->tableCon.clear();
+    for(int i=0;i<flist.length();i++)
+    {
+        session->tableCon.append(flist[i]);
+
+        //Add Tablename from file to the Comboboxes
+        QFile lTable(flist[i]);
+        lTable.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream stream(&lTable);
+        QString title = stream.readLine();
+        lTable.close();
+        ui->cob_Table->addItem(title);
+        ui->cob_TableCh->addItem(title);
+    }
 }
 
 void MainWindow::refresh_cowTable()
 {
-    QSqlQueryModel* cowModel = new QSqlTableModel(this, session->getSQLDatabase());
-    ui->tv_Cows->setModel(cowModel);
-    QSqlQuery query(session->getSQLDatabase());
-
-    QString statement = "SELECT DISTINCT ";
+    QString statement = "SELECT ";
 
     //add Columns
-    if(cols.length()>0)
-    {
-        for(int i = 0; i < cols.length(); i++)
-            statement.append(cols[i]+" AS "+colTrans[cols[i]]+", ");
-        //Remove last ","
-        statement.remove(statement.length()-2,1);
-    }
-    else
-        statement.append("* ");
+    for(int i = 0; i < session->cols.length(); i++)
+        statement.append(session->cols[i]+" AS "+session->colTrans[session->cols[i]]+", ");
+    //Remove last ","
+    statement.remove(statement.length()-2,1);
 
-    statement.append("FROM cows WHERE farmID ="+farmID+" ");
+    statement.append("FROM cows JOIN farms ON cows.farmID=farms.ID WHERE cows.farmID="+session->farmID+" ");
 
-    for(int i = 0; i != filter.length(); i++)
-        statement.append(filter[i]+" ");
+    for(int i = 0; i != session->filter.length(); i++)
+        statement.append(session->filter[i]+" ");
 
-    statement.append("ORDER BY "+order);
+    statement.append("ORDER BY "+session->order);
 
+    QSqlQuery query(session->getSQLDatabase());
     query.exec(statement);
     cowModel->setQuery(query);
+}
+
+void MainWindow::refresh_farmTable()
+{
+    QString statement = "SELECT ";
+
+    statement.append("id AS "+session->colTrans["farms.id"]+", ");
+    statement.append("name AS "+session->colTrans["farms.name"]+", ");
+    statement.append("firstname AS "+session->colTrans["farms.firstname"]+", ");
+    statement.append("lastname AS "+session->colTrans["farms.lastname"]+" ");
+
+    statement.append("FROM farms ");
+
+    statement.append("ORDER BY name");
+
+    QSqlQuery query(session->getSQLDatabase());
+    query.exec(statement);
+    farmModel->setQuery(query);
 }
 
 
@@ -135,6 +210,20 @@ void MainWindow::on_pb_FarmsSelectMarked_clicked()
     ui->tab_Report->setEnabled(true);
     ui->menuReport->setEnabled(true);
     //session->setActiveFarm(&session->getFarm(index?));
+
+    int row;
+
+    QModelIndexList selectedList = ui->tv_Farms->selectionModel()->selectedRows();
+    if (selectedList.count()>0)
+        row = selectedList.at(0).row();
+    else
+        QMessageBox::information(this,"", "Bitte Betrieb auswählen");
+
+
+    QModelIndex zelle = farmModel->index(row, 0, QModelIndex()); // row, column
+    session->farmID = farmModel->data(zelle, Qt::DisplayRole).toString();
+
+    refresh_cowTable();
 }
 
 /** Button for searching a farm and marking it
@@ -205,7 +294,10 @@ void MainWindow::on_pb_AddProperty_clicked()
     //read property from combobox and add it using
     //session->getReport()->addProperty(...);
     if (!ui->cB_diff->checkState())
+    {
         ui->lw_Property->addItem(new QListWidgetItem(ui->cob_Property->currentText()));
+        //cols.append(colTrans.key(ui->cob_Property->currentText()));
+    }
     else
         if   ((ui->cob_Property->currentText() != "Lebensnummer")
             &&(ui->cob_Property->currentText() != "Kuhname")
@@ -250,7 +342,7 @@ Clicking on the Cols to sort
 */
 void MainWindow::on_sectionClicked(int x)
 {
-    order = cols[x];
+    session->order = session->cols[x];
     refresh_cowTable();
 }
 
