@@ -3,6 +3,9 @@
 #include <qtextstream.h>
 #include <qmath.h>
 
+#include<QMap>
+#include<QString>
+
 DataBaseManager::DataBaseManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -97,7 +100,9 @@ bool DataBaseManager::importFromFile(QString fileName)
     int senseLessLen = 8;
 
     //Final array (Cows x Values)
-    QMap<QString, QList<QString> > cow;
+    typedef QList<QString> PropertyList;
+    typedef QMap<QString, PropertyList> CowMap;
+    CowMap cow;
     //Farm-nb. -> NOT INTEGER (caused by occurable leading zeros)
     QString farmNb;
 
@@ -194,7 +199,7 @@ bool DataBaseManager::importFromFile(QString fileName)
     }
     MLPData.close();
 
-    for(QMap<QString, QList<QString> >::const_iterator iter = cow.begin(); iter!=cow.end();iter++)
+    for(CowMap::const_iterator iter = cow.begin(); iter!=cow.end();iter++)
         query->exec("INSERT INTO cows VALUES ("
                     "'"+iter.key()+"',"
                     "'"+iter.value()[6]+"',"
