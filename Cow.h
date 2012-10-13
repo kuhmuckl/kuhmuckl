@@ -17,6 +17,7 @@ public:
     Cow();  //constructor
     ~Cow(); //destructor
 
+    virtual void print();
 };
 
 #endif // COW_H

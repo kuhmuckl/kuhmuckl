@@ -23,6 +23,9 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -30,15 +33,15 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
         <string>Betrieb</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="lab_FarmCaption">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
@@ -51,10 +54,10 @@
          </widget>
         </item>
         <item>
-         <widget class="QTableView" name="tableView"/>
+         <widget class="QTableView" name="tv_Farms"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pb_FarmsSelectMarked">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -67,43 +70,47 @@
          </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout">
+         <layout class="QFormLayout" name="fl_Farm">
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="lab_FarmKeyword">
             <property name="text">
              <string>Begriff:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="ed_FarmName">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="lab_concerning">
             <property name="text">
              <string>enthalten in ...</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QCheckBox" name="checkBox_2">
+           <widget class="QCheckBox" name="cB_FarmerName">
             <property name="text">
              <string>Landwirtsnamen</string>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QCheckBox" name="checkBox_3">
+           <widget class="QCheckBox" name="cB_FarmDescription">
             <property name="text">
              <string>Beschreibung</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="cB_FarmName">
             <property name="text">
              <string>Betriebsnamen</string>
             </property>
@@ -112,7 +119,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="pb_FarmsSearchAndMark">
           <property name="minimumSize">
            <size>
             <width>300</width>
@@ -126,329 +133,209 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="tab_Cows">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
         <string>Kuhtabelle</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLabel" name="label_4">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-            <underline>true</underline>
-           </font>
+         <widget class="QTabWidget" name="tabWidgetCows">
+          <property name="currentIndex">
+           <number>0</number>
           </property>
-          <property name="text">
-           <string>Kühe</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableView" name="tableView_2"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Markierten Eintrag auswählen</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_2">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QFrame" name="frame">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QFormLayout" name="formLayout_2">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetDefaultConstraint</enum>
+          <widget class="QWidget" name="tab_Cows_Home">
+           <attribute name="title">
+            <string>Herde</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QLabel" name="lab_CowsDescription">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+                <underline>true</underline>
+               </font>
               </property>
-              <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              <property name="text">
+               <string>Kühe des gewählten Betriebs</string>
               </property>
-              <property name="rowWrapPolicy">
-               <enum>QFormLayout::DontWrapRows</enum>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tv_Cows"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_SelectMarked">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
               </property>
-              <property name="horizontalSpacing">
-               <number>0</number>
+              <property name="text">
+               <string>Markierte Kuh einzeln betrachten</string>
               </property>
-              <property name="verticalSpacing">
-               <number>3</number>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_CowsSearchAndMark">
+              <property name="minimumSize">
+               <size>
+                <width>300</width>
+                <height>50</height>
+               </size>
               </property>
-              <property name="margin">
-               <number>0</number>
+              <property name="text">
+               <string>In neuer Tabelle zusammenstellen</string>
               </property>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="checkBox_4">
-                <property name="text">
-                 <string>Nach Kuhnamen suchen:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="lineEdit_2"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="checkBox_6">
-                <property name="text">
-                 <string>Fett-Eiweiß-Quotient unter</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="singleStep">
-                 <double>0.200000000000000</double>
-                </property>
-                <property name="value">
-                 <double>1.200000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="checkBox_7">
-                <property name="text">
-                 <string>Fett-Eiweiß-Quotient über</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="singleStep">
-                 <double>0.200000000000000</double>
-                </property>
-                <property name="value">
-                 <double>1.400000000000000</double>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_3">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QFormLayout" name="formLayout_3">
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="checkBox_8">
-                <property name="text">
-                 <string>Zellzahlen über</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="checkBox_5">
-                <property name="text">
-                 <string>Fettwert (in %) unter </string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QDoubleSpinBox" name="doubleSpinBox">
-                <property name="maximumSize">
-                 <size>
-                  <width>60</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="maximum">
-                 <double>100.000000000000000</double>
-                </property>
-                <property name="singleStep">
-                 <double>0.200000000000000</double>
-                </property>
-                <property name="value">
-                 <double>3.700000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="checkBox_9">
-                <property name="text">
-                 <string>Zellzahlen unter</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QSpinBox" name="spinBox">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="maximum">
-                 <number>2000000</number>
-                </property>
-                <property name="singleStep">
-                 <number>50000</number>
-                </property>
-                <property name="value">
-                 <number>200000</number>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QSpinBox" name="spinBox_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="maximum">
-                 <number>2000000</number>
-                </property>
-                <property name="singleStep">
-                 <number>50000</number>
-                </property>
-                <property name="value">
-                 <number>800000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Suchen und Markieren</string>
-          </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_CowTable">
+           <attribute name="title">
+            <string>Ausgewählte Tabelle</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QTableView" name="tableView"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_SaveCowTableChanges">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Änderungen speichern</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_ExportCowTable">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Exportieren</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_CowView">
+           <attribute name="title">
+            <string>Ausgewählte Kuh</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="lab_CowViewDescription">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Eigenschaften der Kuh ...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tv_CowView"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_SaveCowChanges">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Änderungen speichern</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Kuhübersicht</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_5">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-            <underline>true</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Eigenschaften der Kuh ...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTableView" name="tableView_3"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_5">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Änderungen speichern</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="tab_Diagram">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
         <string>Diagramm</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QGraphicsView" name="graphicsView"/>
+         <widget class="QGraphicsView" name="gv_Diagram"/>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout_4">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_6">
+         <layout class="QFormLayout" name="fl_diagram">
+          <item row="1" column="0">
+           <widget class="QLabel" name="lab_XAxis">
             <property name="text">
              <string>X-Achse</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_7">
+          <item row="2" column="0">
+           <widget class="QLabel" name="lab_YAxis">
             <property name="text">
              <string>Y-Achse</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboBox"/>
-          </item>
           <item row="1" column="1">
-           <widget class="QComboBox" name="comboBox_2"/>
+           <widget class="QComboBox" name="cob_XAxis">
+            <item>
+             <property name="text">
+              <string>&lt;Der konstante Anstieg, z.B. Zeit in Monaten&gt;</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="cob_YAxis">
+            <item>
+             <property name="text">
+              <string>&lt;Der dynamische Anstieg, z.B. Milchabgabe&gt;</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="cb_diagramForSingleCo">
+            <property name="text">
+             <string>Diagramm über eine Einzelne Kuh?</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="cob_CowNrName">
+            <item>
+             <property name="text">
+              <string>&lt;Nummer/Name der Kuh&gt;</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="pb_CreatDiagram">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -462,52 +349,345 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_5">
+      <widget class="QWidget" name="tab_Report">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="title">
-        <string>Auswertung</string>
+        <string>Tabellen verwalten</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QGraphicsView" name="graphicsView_2"/>
+         <widget class="QFrame" name="frame_2">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QListWidget" name="lw_Property"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="lab_Property">
+             <property name="text">
+              <string>Eigenschaft hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cob_Property">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <item>
+              <property name="text">
+               <string>Lebensnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Kuhname</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Kuhnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Laktationstage</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Laktationsnummer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Milch in kg</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fett in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Eiweiß in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Harnstoff in %</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Zellen</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Milch (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fett (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Eiweiß (aufgelaufen)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Messdatum</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Prüfnummer</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cB_diff">
+             <property name="text">
+              <string>Differenz</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_AddProperty">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Eigenschaft hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_DelProperty">
+             <property name="text">
+              <string>Eigenschaft löschen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout_5">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-          </property>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>Eigenschaft</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="comboBox_3"/>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>aus Tabelle ...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="comboBox_4"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_7">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
+         <widget class="QPushButton" name="sb_saveTable">
           <property name="text">
-           <string>Eigenschaft hinzufügen</string>
+           <string>Speichern</string>
           </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QListWidget" name="lw_Filter"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="lab_Property_2">
+             <property name="text">
+              <string>Filter hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_3">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QComboBox" name="cob_FilterName">
+                <item>
+                 <property name="text">
+                  <string>Lebensnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kuhname</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kuhnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Laktationstage</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Laktationsnummer</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milch in kg</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fett in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Eiweiß in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Harnstoff in %</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Zellen</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milch (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fett (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Eiweiß (aufgelaufen)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Messdatum</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Prüfnummer</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cob_FilterOperator">
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>=</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>&gt;</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>≥</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>≤</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>&lt;</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>≠</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="le_FilterValue"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_AddAndFilter">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Filter als &quot;und&quot; hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_AddOrFilter">
+             <property name="text">
+              <string>Filter als &quot;oder&quot; hinzufügen</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_delFilter">
+             <property name="text">
+              <string>Filter löschen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -517,6 +697,9 @@
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -525,121 +708,140 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDatei">
+   <widget class="QMenu" name="menuData">
     <property name="title">
      <string>Datei</string>
     </property>
-    <addaction name="actionStartseite"/>
-    <addaction name="actionBeenden"/>
+    <addaction name="actionReset"/>
+    <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuHilfe">
+   <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Hilfe</string>
     </property>
-    <widget class="QMenu" name="menuWie">
+    <widget class="QMenu" name="menuHow">
      <property name="title">
       <string>Wie ...</string>
      </property>
-     <addaction name="action_w_hle_ich_einen_Betrieb_aus"/>
-     <addaction name="action_betrachte_ich_eine_Kuh_genauer"/>
-     <addaction name="action_erstelle_ich_ein_Diagramm"/>
-     <addaction name="action_fertige_ich_eine_Auswertung_an"/>
+     <addaction name="action_ToChoseAFarm"/>
+     <addaction name="action_ToCheckCowDetails"/>
+     <addaction name="action_ToCreateDiagrams"/>
+     <addaction name="action_ToCreateReports"/>
     </widget>
-    <widget class="QMenu" name="menuWarum">
+    <widget class="QMenu" name="menuWhy">
      <property name="title">
       <string>Warum ...</string>
      </property>
-     <addaction name="action_sind_die_Reiter_anfangs_ausgegraut"/>
+     <addaction name="action_AreTabsDisabled"/>
     </widget>
-    <widget class="QMenu" name="menuWo">
+    <widget class="QMenu" name="menuWhere">
      <property name="title">
       <string>Wo ...</string>
      </property>
-     <addaction name="action_drucke_ich"/>
-     <addaction name="action_lese_ich_neue_Messergebnisse_ein"/>
-     <addaction name="action_sichere_ich_meine_Vorlagen"/>
+     <addaction name="action_ToPrint"/>
+     <addaction name="action_ToReadNewData"/>
+     <addaction name="action_ToSaveMyTemplates"/>
     </widget>
-    <addaction name="menuWie"/>
-    <addaction name="menuWarum"/>
-    <addaction name="menuWo"/>
+    <addaction name="menuHow"/>
+    <addaction name="menuWhy"/>
+    <addaction name="menuWhere"/>
    </widget>
    <widget class="QMenu" name="menuInfo">
     <property name="title">
      <string>Info</string>
     </property>
-    <addaction name="action_ber"/>
+    <addaction name="actionAbout"/>
     <addaction name="actionTeam"/>
    </widget>
-   <widget class="QMenu" name="menuAuswertung">
-    <property name="title">
-     <string>Auswertung</string>
+   <widget class="QMenu" name="menuReport">
+    <property name="enabled">
+     <bool>true</bool>
     </property>
-    <widget class="QMenu" name="menuK_rzlich_verwendete_Vorlagen">
+    <property name="title">
+     <string>Kuhtabelle</string>
+    </property>
+    <widget class="QMenu" name="menuRecentlyUsedReports">
      <property name="title">
       <string>Kürzlich verwendete Vorlagen</string>
      </property>
-     <addaction name="action_keine"/>
+     <addaction name="action_no_Reports"/>
     </widget>
-    <widget class="QMenu" name="menuExportieren_oder_Drucken_2">
+    <widget class="QMenu" name="menuExportReport">
      <property name="title">
       <string>Exportieren oder Drucken</string>
      </property>
-     <widget class="QMenu" name="menuExportieren_als_2">
+     <widget class="QMenu" name="menuExportReportAs">
       <property name="title">
        <string>Exportieren als ...</string>
       </property>
-      <addaction name="action_Textdatei"/>
-      <addaction name="action_PDF_2"/>
-      <addaction name="action_Worddokument"/>
+      <addaction name="action_Report_TextFile"/>
+      <addaction name="action_Report_PDF"/>
+      <addaction name="action_Report_DOC"/>
      </widget>
-     <addaction name="actionDrucken_2"/>
-     <addaction name="menuExportieren_als_2"/>
+     <addaction name="actionPrintReport"/>
+     <addaction name="menuExportReportAs"/>
     </widget>
-    <addaction name="menuK_rzlich_verwendete_Vorlagen"/>
+    <addaction name="menuRecentlyUsedReports"/>
     <addaction name="separator"/>
-    <addaction name="actionNeue_Vorlage"/>
-    <addaction name="actionVorlage_laden"/>
-    <addaction name="actionVorlage_speichern"/>
+    <addaction name="actionNewReportTemplate"/>
+    <addaction name="actionLoadReportTemplate"/>
+    <addaction name="actionSaveReportTemplate"/>
     <addaction name="separator"/>
-    <addaction name="menuExportieren_oder_Drucken_2"/>
+    <addaction name="menuExportReport"/>
    </widget>
-   <widget class="QMenu" name="menuDiagramm">
+   <widget class="QMenu" name="menuDiagram">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Diagramm</string>
     </property>
-    <widget class="QMenu" name="menuK_rzlich_verwendete_Vorlagen_2">
+    <widget class="QMenu" name="menuRecentlyUsedDiagrams">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="title">
       <string>Kürzlich verwendete Vorlagen</string>
      </property>
-     <addaction name="action_keine_2"/>
+     <addaction name="action_no_Diagrams"/>
     </widget>
-    <widget class="QMenu" name="menuExportieren_oder_Drucken">
+    <widget class="QMenu" name="menuExportDiagram">
      <property name="title">
       <string>Exportieren oder Drucken</string>
      </property>
-     <widget class="QMenu" name="menuExportieren_als">
+     <widget class="QMenu" name="menuExportDiagramAs">
       <property name="title">
        <string>Exportieren als ...</string>
       </property>
-      <addaction name="action_Bild_JPEG"/>
-      <addaction name="action_Vektorgrafik_SVG"/>
-      <addaction name="action_PDF"/>
+      <addaction name="action_Diagram_JPEG"/>
+      <addaction name="action_Diagram_SVG"/>
+      <addaction name="action_Diagram_PDF"/>
      </widget>
-     <addaction name="actionDrucken"/>
-     <addaction name="menuExportieren_als"/>
+     <addaction name="actionPrintDiagram"/>
+     <addaction name="menuExportDiagramAs"/>
     </widget>
-    <addaction name="menuK_rzlich_verwendete_Vorlagen_2"/>
+    <addaction name="menuRecentlyUsedDiagrams"/>
     <addaction name="separator"/>
-    <addaction name="actionNeue_Vorlage_2"/>
-    <addaction name="actionVorlage_speichern_2"/>
-    <addaction name="actionVorlage_laden_2"/>
+    <addaction name="actionNewDiagramTemplate"/>
+    <addaction name="actionSaveDiagramTemplate"/>
+    <addaction name="actionLoadDiagramTemplate"/>
     <addaction name="separator"/>
-    <addaction name="menuExportieren_oder_Drucken"/>
+    <addaction name="menuExportDiagram"/>
    </widget>
-   <addaction name="menuDatei"/>
-   <addaction name="menuDiagramm"/>
-   <addaction name="menuAuswertung"/>
-   <addaction name="menuHilfe"/>
+   <widget class="QMenu" name="menuDataSet">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Datensätze</string>
+    </property>
+    <addaction name="actionReadFromFile"/>
+   </widget>
+   <addaction name="menuData"/>
+   <addaction name="menuDataSet"/>
+   <addaction name="menuReport"/>
+   <addaction name="menuDiagram"/>
+   <addaction name="menuHelp"/>
    <addaction name="menuInfo"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -664,22 +866,17 @@
     <bool>false</bool>
    </property>
   </widget>
-  <action name="actionStartseite">
+  <action name="actionReset">
    <property name="text">
     <string>Zurücksetzen</string>
    </property>
   </action>
-  <action name="actionBeenden">
+  <action name="actionQuit">
    <property name="text">
     <string>Beenden</string>
    </property>
   </action>
-  <action name="actionAus_Datei_einlesen">
-   <property name="text">
-    <string>Aus Datei einlesen</string>
-   </property>
-  </action>
-  <action name="action_ber">
+  <action name="actionAbout">
    <property name="text">
     <string>Über</string>
    </property>
@@ -689,62 +886,62 @@
     <string>Team</string>
    </property>
   </action>
-  <action name="action_w_hle_ich_einen_Betrieb_aus">
+  <action name="action_ToChoseAFarm">
    <property name="text">
     <string>... wähle ich einen Betrieb aus?</string>
    </property>
   </action>
-  <action name="action_betrachte_ich_eine_Kuh_genauer">
+  <action name="action_ToCheckCowDetails">
    <property name="text">
     <string>... betrachte ich eine Kuh genauer?</string>
    </property>
   </action>
-  <action name="action_erstelle_ich_ein_Diagramm">
+  <action name="action_ToCreateDiagrams">
    <property name="text">
     <string>... erstelle ich ein Diagramm?</string>
    </property>
   </action>
-  <action name="action_fertige_ich_eine_Auswertung_an">
+  <action name="action_ToCreateReports">
    <property name="text">
     <string>... fertige ich eine Auswertung an?</string>
    </property>
   </action>
-  <action name="action_sind_die_Reiter_anfangs_ausgegraut">
+  <action name="action_AreTabsDisabled">
    <property name="text">
     <string>... sind die Reiter anfangs ausgegraut?</string>
    </property>
   </action>
-  <action name="action_drucke_ich">
+  <action name="action_ToPrint">
    <property name="text">
     <string>... drucke ich?</string>
    </property>
   </action>
-  <action name="action_lese_ich_neue_Messergebnisse_ein">
+  <action name="action_ToReadNewData">
    <property name="text">
     <string>... lese ich neue Messergebnisse ein?</string>
    </property>
   </action>
-  <action name="action_sichere_ich_meine_Vorlagen">
+  <action name="action_ToSaveMyTemplates">
    <property name="text">
     <string>... sichere ich meine Vorlagen?</string>
    </property>
   </action>
-  <action name="actionVorlage_laden">
+  <action name="actionLoadReportTemplate">
    <property name="text">
     <string>Vorlage laden</string>
    </property>
   </action>
-  <action name="actionVorlage_speichern">
+  <action name="actionSaveReportTemplate">
    <property name="text">
     <string>Vorlage speichern</string>
    </property>
   </action>
-  <action name="actionNeue_Vorlage">
+  <action name="actionNewReportTemplate">
    <property name="text">
     <string>Neue Vorlage</string>
    </property>
   </action>
-  <action name="action_keine">
+  <action name="action_no_Reports">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -752,22 +949,22 @@
     <string>(keine)</string>
    </property>
   </action>
-  <action name="actionNeue_Vorlage_2">
+  <action name="actionNewDiagramTemplate">
    <property name="text">
     <string>Neue Vorlage</string>
    </property>
   </action>
-  <action name="actionVorlage_speichern_2">
+  <action name="actionSaveDiagramTemplate">
    <property name="text">
     <string>Vorlage speichern</string>
    </property>
   </action>
-  <action name="actionVorlage_laden_2">
+  <action name="actionLoadDiagramTemplate">
    <property name="text">
     <string>Vorlage laden</string>
    </property>
   </action>
-  <action name="action_keine_2">
+  <action name="action_no_Diagrams">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -775,44 +972,52 @@
     <string>(keine)</string>
    </property>
   </action>
-  <action name="actionDrucken">
+  <action name="actionPrintDiagram">
    <property name="text">
     <string>Drucken</string>
    </property>
   </action>
-  <action name="action_Bild_JPEG">
+  <action name="action_Diagram_JPEG">
    <property name="text">
     <string>... Bild (JPEG)</string>
    </property>
   </action>
-  <action name="action_Vektorgrafik_SVG">
+  <action name="action_Diagram_SVG">
    <property name="text">
     <string>... Vektorgrafik (SVG)</string>
    </property>
   </action>
-  <action name="action_PDF">
+  <action name="action_Diagram_PDF">
    <property name="text">
     <string>... PDF</string>
    </property>
   </action>
-  <action name="actionDrucken_2">
+  <action name="actionPrintReport">
    <property name="text">
     <string>Drucken</string>
    </property>
   </action>
-  <action name="action_Textdatei">
+  <action name="action_Report_TextFile">
    <property name="text">
     <string>... Textdatei</string>
    </property>
   </action>
-  <action name="action_PDF_2">
+  <action name="action_Report_PDF">
    <property name="text">
     <string>... PDF</string>
    </property>
   </action>
-  <action name="action_Worddokument">
+  <action name="action_Report_DOC">
    <property name="text">
     <string>... Worddokument</string>
+   </property>
+  </action>
+  <action name="actionReadFromFile">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Aus Datei einlesen</string>
    </property>
   </action>
  </widget>
