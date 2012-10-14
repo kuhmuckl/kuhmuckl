@@ -57,6 +57,8 @@ private slots:
 
     void on_sectionClicked(int);
 
+    void on_changeConfig(int index);
+
     void on_actionReadFromFile_triggered();
 
     void on_action_Report_DOC_triggered();
@@ -108,6 +110,10 @@ private slots:
     void on_actionAbout_triggered();
 
     void load_Table(int nb);
+
+    void on_pb_delFilter_clicked();
+
+    void on_pb_DelProperty_clicked();
 
 private:
     Ui::MainWindow  *ui;

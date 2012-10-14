@@ -45,7 +45,7 @@ public:
     Farm*           getActiveFarm();
 
     QMap<QString, QString>  colTrans;                       //Name of the col to the shown name
-    QList<QString>          tableCon;                               //table configurations
+    QList<QString>          tableCon;                       //table configurations
     QList<QString>          cols;
     QList<QString>          filter;
     QString                 order;

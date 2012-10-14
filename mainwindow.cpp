@@ -20,6 +20,19 @@ MainWindow::MainWindow(QWidget *parent) :
     on_actionReset_triggered();
 
     connect(ui->tv_Cows->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(on_sectionClicked(int)));
+    connect(ui->cob_Table , SIGNAL(currentIndexChanged(int)),this,SLOT(on_changeConfig(int)));
+    connect(ui->cob_TableCh , SIGNAL(currentIndexChanged(int)),this,SLOT(on_changeConfig(int)));
+
+    typedef QMap<QString, QString> ColTransMap;
+
+    ui->cob_Property->clear();
+    ui->cob_FilterName->clear();
+    for(ColTransMap::const_iterator iter = session->colTrans.begin(); iter!=session->colTrans.end();iter++)
+        if (iter.key() != "farms.ID")
+        {
+            ui->cob_Property->addItem(iter.value().mid(1,iter.value().length()-2));
+            ui->cob_FilterName->addItem(iter.value().mid(1,iter.value().length()-2));
+        }
 }
 
 /** Form destructor
@@ -70,8 +83,8 @@ void MainWindow::on_actionReset_triggered()
     session->colTrans["cows.lifenb"].push_back("'Lebensnummer'");
     session->colTrans["cows.cowname"].push_back("'Kuhname'");
     session->colTrans["cows.cownb"].push_back("'Kuhnummer'");
-    session->colTrans["cows.ldays"].push_back("'Lak - Tage'");
-    session->colTrans["cows.lnb"].push_back("'Lak - Nummer'");
+    session->colTrans["cows.ldays"].push_back("'Lak-Tage'");
+    session->colTrans["cows.lnb"].push_back("'Lak-Nummer'");
     session->colTrans["cows.milk"].push_back("'Milch in kg'");
     session->colTrans["cows.fat"].push_back("'Fett in %'");
     session->colTrans["cows.protein"].push_back("'Eiweiß in %'");
@@ -80,13 +93,13 @@ void MainWindow::on_actionReset_triggered()
     session->colTrans["cows.milkall"].push_back("'Milch (aufgelaufen)'");
     session->colTrans["cows.fatall"].push_back("'Fett (aufgelaufen)'");
     session->colTrans["proteinall"].push_back("'Eiweiß (aufgelaufen)'");
-    session->colTrans["cows.farmID"].push_back("'Betriebsnummer'");
+    session->colTrans["cows.farmID"].push_back("'Betriebs-Nummer'");
     session->colTrans["cows.messuredate"].push_back("'Messdatum'");
     session->colTrans["cows.messurenb"].push_back("'Prüfnummer'");
     session->colTrans["farms.id"].push_back("'Betriebs-Nummer'");
-    session->colTrans["farms.name"].push_back("'Name'");
-    session->colTrans["farms.lastname"].push_back("'Nachname'");
-    session->colTrans["farms.firstname"].push_back("'Vorname'");
+    session->colTrans["farms.name"].push_back("'Betriebs-name'");
+    session->colTrans["farms.lastname"].push_back("'Besitzer Nachname'");
+    session->colTrans["farms.firstname"].push_back("'Besitzer Vorname'");
     session->colTrans["farms.street"].push_back("'Straße'");
     session->colTrans["farms.PLZ"].push_back("'PLZ'");
     session->colTrans["farms.city"].push_back("'Ort'");
@@ -127,6 +140,41 @@ void MainWindow::load_Table(int nb)
         session->order = line;
 
     loadTable.close();
+
+    ui->lw_Property->clear();
+    ui->lw_Filter->clear();
+
+    for(int i=0;i<session->cols.length();i++)
+        ui->lw_Property->addItem((session->colTrans[session->cols[i]]).mid(1,session->colTrans[session->cols[i]].length()-2));
+
+    for(int i=0;i<session->filter.length();i++)
+    {
+        QString germanFilter="";
+        QStringList l = session->filter[i].split(" ");
+        int bias;
+        if ((l[0] == "OR")||(l[0] == "AND"))
+            bias = 1;
+        else
+            bias = 0;
+
+        if (l[0] == "OR")
+            germanFilter.append("ODER ");
+        if (l[0] == "AND")
+            germanFilter.append("UND ");
+
+        germanFilter.append((session->colTrans[l[bias]]).mid(1,session->colTrans[l[bias]].length()-2)+" ");
+
+        if (l[bias+1] == "<>")
+            germanFilter.append("? ");
+        else
+            germanFilter.append(l[bias+1]+" ");
+
+        for (int i=bias+2;i<l.length();i++)
+            germanFilter.append(l[i]);
+
+        ui->lw_Filter->addItem(germanFilter);
+
+    }
 }
 
 void MainWindow::refresh_tableCon()
@@ -138,6 +186,8 @@ void MainWindow::refresh_tableCon()
     QStringList flist = dir.entryList(fileFilter);
 
     session->tableCon.clear();
+    ui->cob_Table->clear();
+    ui->cob_TableCh->clear();
     for(int i=0;i<flist.length();i++)
     {
         session->tableCon.append(flist[i]);
@@ -163,12 +213,18 @@ void MainWindow::refresh_cowTable()
     //Remove last ","
     statement.remove(statement.length()-2,1);
 
-    statement.append("FROM cows JOIN farms ON cows.farmID=farms.ID WHERE cows.farmID="+session->farmID+" ");
+    statement.append("FROM cows JOIN farms ON cows.farmID=farms.ID WHERE (cows.farmID="+session->farmID+" ");
 
+    if (session->filter.length() > 0)
+        statement.append("AND (");
     for(int i = 0; i != session->filter.length(); i++)
         statement.append(session->filter[i]+" ");
 
-    statement.append("ORDER BY "+session->order);
+    if (session->filter.length() > 0)
+        statement.append(")");
+
+    if (session->order != "")
+        statement.append(") ORDER BY "+session->order);
 
     QSqlQuery query(session->getSQLDatabase());
     query.exec(statement);
@@ -191,6 +247,15 @@ void MainWindow::refresh_farmTable()
     QSqlQuery query(session->getSQLDatabase());
     query.exec(statement);
     farmModel->setQuery(query);
+}
+
+void MainWindow::on_changeConfig(int index)
+{
+    if(index != -1)
+    {
+        load_Table(index);
+        refresh_cowTable();
+    }
 }
 
 
@@ -296,7 +361,7 @@ void MainWindow::on_pb_AddProperty_clicked()
     if (!ui->cB_diff->checkState())
     {
         ui->lw_Property->addItem(new QListWidgetItem(ui->cob_Property->currentText()));
-        //cols.append(colTrans.key(ui->cob_Property->currentText()));
+        session->cols.append(session->colTrans.key("'"+ui->cob_Property->currentText()+"'"));
     }
     else
         if   ((ui->cob_Property->currentText() != "Lebensnummer")
@@ -306,37 +371,65 @@ void MainWindow::on_pb_AddProperty_clicked()
         {
             ui->lw_Property->addItem(new QListWidgetItem(ui->cob_Property->currentText()+" Diff."));
         }
+    refresh_cowTable();
 }
 /** Add And Filter Button
   Adds another property to the existing Report.
 */
 void MainWindow::on_pb_AddAndFilter_clicked()
 {
+    QString filterName = ui->cob_FilterName->currentText();
+    QString filterOperator = ui->cob_FilterOperator->currentText();
+    QString filterValue = ui->le_FilterValue->text();
+
     //read filter from comboboxes and add it
-    if (ui->lw_Filter->count() > 0)
+    if (session->filter.length() > 0)
+    {
         ui->lw_Filter->addItem(new QListWidgetItem(
-            "AND "+ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+            "UND "+filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
+        if (filterOperator == "?")filterOperator = "<>";
+        session->filter.append("AND "+session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
+    }
     else
+    {
         ui->lw_Filter->addItem(new QListWidgetItem(
-            ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+                                   filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
+        if (filterOperator == "?")filterOperator = "<>";
+        session->filter.append(session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
+    }
+    refresh_cowTable();
 }
 /** Add Or Filter Button
   Adds another property to the existing Report.
 */
 void MainWindow::on_pb_AddOrFilter_clicked()
 {
+    QString filterOperator = ui->cob_FilterOperator->currentText();
+    QString filterName = ui->cob_FilterName->currentText();
+    QString filterValue = ui->le_FilterValue->text();
+
     //read filter from comboboxes and add it
-    if (ui->lw_Filter->count() > 0)
+    if (session->filter.length() > 0)
+    {
         ui->lw_Filter->addItem(new QListWidgetItem(
-            "OR "+ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+            "ODER "+filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
+        if (filterOperator == "?")filterOperator = "<>";
+        session->filter.append("OR "+session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
+    }
     else
+    {
         ui->lw_Filter->addItem(new QListWidgetItem(
-            ui->cob_FilterName->currentText()+" "+ui->cob_FilterOperator->currentText()+" "+ui->le_FilterValue->text()
+            filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
+        if (filterOperator == "?")filterOperator = "<>";
+        session->filter.append(session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
+    }
+    refresh_cowTable();
 }
+
 /**
 Clicking on the Cols to sort
 */
@@ -501,3 +594,27 @@ void MainWindow::on_actionAbout_triggered()
   Actions that haven't been sorted into the upper sections!!
 **********************************************************/
 
+
+void MainWindow::on_pb_delFilter_clicked()
+{
+    int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
+
+    ui->lw_Filter->takeItem(index);
+    session->filter.removeAt(index);
+
+    if ((index == 0)&&(session->filter.size()))
+    {
+        session->filter[0] = session->filter[0].right(session->filter[0].length()-session->filter[0].indexOf(" ")-1);
+        ui->lw_Filter->insertItem(0,ui->lw_Filter->item(0)->text().right(ui->lw_Filter->item(0)->text().length()-ui->lw_Filter->item(0)->text().indexOf(" ")-1));
+        session->filter.removeAt(1);
+        ui->lw_Filter->takeItem(1);
+    }
+}
+
+void MainWindow::on_pb_DelProperty_clicked()
+{
+    int index = ui->lw_Property->row(ui->lw_Property->currentItem());
+
+    ui->lw_Property->takeItem(index);
+    session->cols.removeAt(index);
+}
