@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
@@ -99,6 +99,13 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="cB_FarmName">
+            <property name="text">
+             <string>Betriebsnamen</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="1">
            <widget class="QCheckBox" name="cB_FarmerName">
             <property name="text">
@@ -110,13 +117,6 @@
            <widget class="QCheckBox" name="cB_FarmDescription">
             <property name="text">
              <string>Beschreibung</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="cB_FarmName">
-            <property name="text">
-             <string>Betriebsnamen</string>
             </property>
            </widget>
           </item>
@@ -148,7 +148,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidgetCows">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_Cows_Home">
            <attribute name="title">
@@ -191,19 +191,6 @@
               </property>
               <property name="text">
                <string>Markierte Kuh einzeln betrachten</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pb_CowsSearchAndMark">
-              <property name="minimumSize">
-               <size>
-                <width>300</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>In neuer Tabelle zusammenstellen</string>
               </property>
              </widget>
             </item>
@@ -319,6 +306,11 @@
               <string>&lt;Der konstante Anstieg, z.B. Zeit in Monaten&gt;</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Messdaten</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item row="2" column="1">
@@ -326,6 +318,51 @@
             <item>
              <property name="text">
               <string>&lt;Der dynamische Anstieg, z.B. Milchabgabe&gt;</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Laktationstage</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Milch in kg</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Fett in %</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Eiweiß in %</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Harnstoff in %</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Zellen</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Eiweiß (aufgelaufen)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Milch (aufgelaufen)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Fett (aufgelaufen)</string>
              </property>
             </item>
            </widget>
@@ -370,138 +407,42 @@
        <attribute name="title">
         <string>Tabellen verwalten</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_12">
         <item>
-         <widget class="QFrame" name="frame_2">
+         <widget class="QFrame" name="frame_8">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
+          <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QListWidget" name="lw_Property"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="lab_Property">
-             <property name="text">
-              <string>Eigenschaft hinzufügen</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cob_Property">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <item>
-              <property name="text">
-               <string>Lebensnummer</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Kuhname</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Kuhnummer</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Laktationstage</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Laktationsnummer</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Milch in kg</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Fett in %</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Eiweiß in %</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Harnstoff in %</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Zellen</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Milch (aufgelaufen)</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Fett (aufgelaufen)</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Eiweiß (aufgelaufen)</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Messdatum</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Prüfnummer</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="cB_diff">
-             <property name="text">
-              <string>Differenz</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pb_AddProperty">
+            <widget class="QLabel" name="label">
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>50</height>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>16777215</height>
               </size>
              </property>
              <property name="text">
-              <string>Eigenschaft hinzufügen</string>
+              <string>Name der Konfiguration:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_DelProperty">
+            <widget class="QComboBox" name="cob_TableCh"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sb_saveTable">
              <property name="text">
-              <string>Eigenschaft löschen</string>
+              <string>Speichern</string>
              </property>
             </widget>
            </item>
@@ -509,45 +450,102 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="cob_TableCh"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="sb_saveTable">
-          <property name="text">
-           <string>Speichern</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame">
+         <widget class="QFrame" name="frame_9">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QListWidget" name="lw_Filter"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="lab_Property_2">
-             <property name="text">
-              <string>Filter hinzufügen</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_3">
+            <widget class="QFrame" name="frame_2">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <layout class="QVBoxLayout" name="verticalLayout_10">
               <item>
-               <widget class="QComboBox" name="cob_FilterName">
+               <widget class="QLabel" name="lab_Property">
+                <property name="font">
+                 <font>
+                  <pointsize>14</pointsize>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Eigenschaften</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_5">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QListWidget" name="lw_Property"/>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frame_4">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_9">
+                    <item>
+                     <widget class="QPushButton" name="pb_propertyUp">
+                      <property name="maximumSize">
+                       <size>
+                        <width>20</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>/\
+/\</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pb_propertyDown">
+                      <property name="maximumSize">
+                       <size>
+                        <width>20</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>\/
+\/</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cob_Property">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <item>
                  <property name="text">
                   <string>Lebensnummer</string>
@@ -626,82 +624,296 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="cob_FilterOperator">
-                <property name="minimumSize">
-                 <size>
-                  <width>50</width>
-                  <height>0</height>
-                 </size>
+               <widget class="QCheckBox" name="cB_diff">
+                <property name="text">
+                 <string>Differenz</string>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>50</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>=</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>&gt;</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>≥</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>≤</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>&lt;</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>≠</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="le_FilterValue"/>
+               <widget class="QPushButton" name="pb_AddProperty">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Eigenschaft hinzufügen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_DelProperty">
+                <property name="text">
+                 <string>Eigenschaft löschen</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_AddAndFilter">
-             <property name="minimumSize">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Maximum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>0</width>
-               <height>50</height>
+               <width>60</width>
+               <height>20</height>
               </size>
              </property>
-             <property name="text">
-              <string>Filter als &quot;und&quot; hinzufügen</string>
-             </property>
-            </widget>
+            </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_AddOrFilter">
-             <property name="text">
-              <string>Filter als &quot;oder&quot; hinzufügen</string>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pb_delFilter">
-             <property name="text">
-              <string>Filter löschen</string>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QLabel" name="lab_Property_2">
+                <property name="font">
+                 <font>
+                  <pointsize>14</pointsize>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Filter</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_6">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QListWidget" name="lw_Filter"/>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frame_7">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_11">
+                    <item>
+                     <widget class="QPushButton" name="pb_FilterUp">
+                      <property name="maximumSize">
+                       <size>
+                        <width>20</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>/\
+/\</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pb_FilterDown">
+                      <property name="maximumSize">
+                       <size>
+                        <width>20</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>\/
+\/</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_3">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QComboBox" name="cob_FilterName">
+                   <item>
+                    <property name="text">
+                     <string>Lebensnummer</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Kuhname</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Kuhnummer</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Laktationstage</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Laktationsnummer</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Milch in kg</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Fett in %</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Eiweiß in %</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Harnstoff in %</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Zellen</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Milch (aufgelaufen)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Fett (aufgelaufen)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Eiweiß (aufgelaufen)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Messdatum</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Prüfnummer</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="cob_FilterOperator">
+                   <property name="minimumSize">
+                    <size>
+                     <width>50</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>50</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>=</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>&gt;</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>≥</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>≤</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>&lt;</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>≠</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="le_FilterValue"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_AddAndFilter">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Filter als &quot;und&quot; hinzufügen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_AddOrFilter">
+                <property name="text">
+                 <string>Filter als &quot;oder&quot; hinzufügen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_delFilter">
+                <property name="text">
+                 <string>Filter löschen</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>

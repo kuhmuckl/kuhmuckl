@@ -5,6 +5,7 @@
 
 #include <QFileDialog>
 #include <QSqlTableModel>
+#include <QComboBox>
 
 #include "Session.h"
 
@@ -24,7 +25,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+protected:
+    void fillComboBox(QComboBox* cb);
 private slots:
 
     void on_actionQuit_triggered();
@@ -114,6 +116,10 @@ private slots:
     void on_pb_delFilter_clicked();
 
     void on_pb_DelProperty_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pb_propertyUp_clicked();
 
 private:
     Ui::MainWindow  *ui;

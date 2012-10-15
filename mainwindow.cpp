@@ -33,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->cob_Property->addItem(iter.value().mid(1,iter.value().length()-2));
             ui->cob_FilterName->addItem(iter.value().mid(1,iter.value().length()-2));
         }
+
+    fillComboBox(ui->cob_XAxis);
+    fillComboBox(ui->cob_YAxis);
 }
 
 /** Form destructor
@@ -44,6 +47,21 @@ MainWindow::~MainWindow()
     delete session;
 }
 
+/**Function to fill Comboboxes with properties ... attention, hard coded */
+void MainWindow::fillComboBox(QComboBox* cb){
+    cb->clear();
+    cb->insertItem(1,session->colTrans["cows.ldays"]);
+    cb->insertItem(1,session->colTrans["cows.ldays"]);
+    cb->insertItem(1,session->colTrans["cows.lnb"]);
+    cb->insertItem(1,session->colTrans["cows.milk"]);
+    cb->insertItem(1,session->colTrans["cows.fat"]);
+    cb->insertItem(1,session->colTrans["cows.protein"]);
+    cb->insertItem(1,session->colTrans["cows.harn"]);
+    cb->insertItem(1,session->colTrans["cows.cells"]);
+    cb->insertItem(1,session->colTrans["cows.milkall"]);
+    cb->insertItem(1,session->colTrans["cows.fatall"]);
+    cb->insertItem(1,session->colTrans["proteinall"]);
+}
 
 /**********************************************************
   Triggered actions of menue bar
@@ -80,34 +98,34 @@ void MainWindow::on_actionReset_triggered()
     cowModel = new QSqlTableModel(this, session->getSQLDatabase());
     ui->tv_Cows->setModel(cowModel);
 
-    session->colTrans["cows.lifenb"].push_back("'Lebensnummer'");
-    session->colTrans["cows.cowname"].push_back("'Kuhname'");
-    session->colTrans["cows.cownb"].push_back("'Kuhnummer'");
-    session->colTrans["cows.ldays"].push_back("'Lak-Tage'");
-    session->colTrans["cows.lnb"].push_back("'Lak-Nummer'");
-    session->colTrans["cows.milk"].push_back("'Milch in kg'");
-    session->colTrans["cows.fat"].push_back("'Fett in %'");
-    session->colTrans["cows.protein"].push_back("'Eiweiß in %'");
-    session->colTrans["cows.harn"].push_back("'Harnstoff in %'");
-    session->colTrans["cows.cells"].push_back("'Zellen'");
-    session->colTrans["cows.milkall"].push_back("'Milch (aufgelaufen)'");
-    session->colTrans["cows.fatall"].push_back("'Fett (aufgelaufen)'");
-    session->colTrans["proteinall"].push_back("'Eiweiß (aufgelaufen)'");
-    session->colTrans["cows.farmID"].push_back("'Betriebs-Nummer'");
-    session->colTrans["cows.messuredate"].push_back("'Messdatum'");
-    session->colTrans["cows.messurenb"].push_back("'Prüfnummer'");
-    session->colTrans["farms.id"].push_back("'Betriebs-Nummer'");
-    session->colTrans["farms.name"].push_back("'Betriebs-name'");
-    session->colTrans["farms.lastname"].push_back("'Besitzer Nachname'");
-    session->colTrans["farms.firstname"].push_back("'Besitzer Vorname'");
-    session->colTrans["farms.street"].push_back("'Straße'");
-    session->colTrans["farms.PLZ"].push_back("'PLZ'");
-    session->colTrans["farms.city"].push_back("'Ort'");
-    session->colTrans["farms.tel"].push_back("'Telefon'");
-    session->colTrans["farms.fax"].push_back("'FAX'");
-    session->colTrans["farms.hint"].push_back("'Bemerkung'");
-    session->colTrans["farms.createdate"].push_back("'Erstellungsdatum'");
-    session->colTrans["farms.changedate"].push_back("'letzte Änderung'");
+    session->colTrans["cows.lifenb"]="'Lebensnummer'";
+    session->colTrans["cows.cowname"]="'Kuhname'";
+    session->colTrans["cows.cownb"]="'Kuhnummer'";
+    session->colTrans["cows.ldays"]="'Lak-Tage'";
+    session->colTrans["cows.lnb"]="'Lak-Nummer'";
+    session->colTrans["cows.milk"]="'Milch in kg'";
+    session->colTrans["cows.fat"]="'Fett in %'";
+    session->colTrans["cows.protein"]="'Eiweiß in %'";
+    session->colTrans["cows.harn"]="'Harnstoff in %'";
+    session->colTrans["cows.cells"]="'Zellen'";
+    session->colTrans["cows.milkall"]="'Milch (aufgelaufen)'";
+    session->colTrans["cows.fatall"]="'Fett (aufgelaufen)'";
+    session->colTrans["proteinall"]="'Eiweiß (aufgelaufen)'";
+    session->colTrans["cows.farmID"]="'Betriebs-Nummer'";
+    session->colTrans["cows.messuredate"]="'Messdatum'";
+    session->colTrans["cows.messurenb"]="'Prüfnummer'";
+    session->colTrans["farms.id"]="'Betriebs-Nummer'";
+    session->colTrans["farms.name"]="'Betriebs-name'";
+    session->colTrans["farms.lastname"]="'Besitzer Nachname'";
+    session->colTrans["farms.firstname"]="'Besitzer Vorname'";
+    session->colTrans["farms.street"]="'Straße'";
+    session->colTrans["farms.PLZ"]="'PLZ'";
+    session->colTrans["farms.city"]="'Ort'";
+    session->colTrans["farms.tel"]="'Telefon'";
+    session->colTrans["farms.fax"]="'FAX'";
+    session->colTrans["farms.hint"]="'Bemerkung'";
+    session->colTrans["farms.createdate"]="'Erstellungsdatum'";
+    session->colTrans["farms.changedate"]="'letzte Änderung'";
 
     refresh_tableCon();
     load_Table(0);
@@ -253,6 +271,10 @@ void MainWindow::on_changeConfig(int index)
 {
     if(index != -1)
     {
+        if(sender()->objectName() == ui->cob_Table->objectName())
+            ui->cob_TableCh->setCurrentIndex(ui->cob_Table->currentIndex());
+        else
+            ui->cob_Table->setCurrentIndex(ui->cob_TableCh->currentIndex());
         load_Table(index);
         refresh_cowTable();
     }
@@ -320,11 +342,6 @@ void MainWindow::on_pb_CowsSearchAndMark_clicked()
     //Search function goes here
 }
 
-
-/**********************************************************
-  Actions concerning the "Kuhübersicht" section
-**********************************************************/
-
 /** Button that saves changes in View of single Cow
 */
 void MainWindow::on_pb_SaveChanges_clicked()
@@ -348,7 +365,7 @@ void MainWindow::on_pb_CreatDiagram_clicked()
 
 
 /**********************************************************
-  Actions concerning the "Auswertung" section
+  Actions concerning the "Tabellen verwalten" section
 **********************************************************/
 
 /** Add Property Button
@@ -436,6 +453,33 @@ Clicking on the Cols to sort
 void MainWindow::on_sectionClicked(int x)
 {
     session->order = session->cols[x];
+    refresh_cowTable();
+}
+
+
+void MainWindow::on_pb_delFilter_clicked()
+{
+    int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
+
+    ui->lw_Filter->takeItem(index);
+    session->filter.removeAt(index);
+
+    if ((index == 0)&&(session->filter.size()))
+    {
+        session->filter[0] = session->filter[0].right(session->filter[0].length()-session->filter[0].indexOf(" ")-1);
+        ui->lw_Filter->insertItem(0,ui->lw_Filter->item(0)->text().right(ui->lw_Filter->item(0)->text().length()-ui->lw_Filter->item(0)->text().indexOf(" ")-1));
+        session->filter.removeAt(1);
+        ui->lw_Filter->takeItem(1);
+    }
+    refresh_cowTable();
+}
+
+void MainWindow::on_pb_DelProperty_clicked()
+{
+    int index = ui->lw_Property->row(ui->lw_Property->currentItem());
+
+    ui->lw_Property->takeItem(index);
+    session->cols.removeAt(index);
     refresh_cowTable();
 }
 
@@ -595,29 +639,7 @@ void MainWindow::on_actionAbout_triggered()
   Actions that haven't been sorted into the upper sections!!
 **********************************************************/
 
-
-void MainWindow::on_pb_delFilter_clicked()
+void MainWindow::on_pb_propertyUp_clicked()
 {
-    int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
 
-    ui->lw_Filter->takeItem(index);
-    session->filter.removeAt(index);
-
-    if ((index == 0)&&(session->filter.size()))
-    {
-        session->filter[0] = session->filter[0].right(session->filter[0].length()-session->filter[0].indexOf(" ")-1);
-        ui->lw_Filter->insertItem(0,ui->lw_Filter->item(0)->text().right(ui->lw_Filter->item(0)->text().length()-ui->lw_Filter->item(0)->text().indexOf(" ")-1));
-        session->filter.removeAt(1);
-        ui->lw_Filter->takeItem(1);
-    }
-    refresh_cowTable();
-}
-
-void MainWindow::on_pb_DelProperty_clicked()
-{
-    int index = ui->lw_Property->row(ui->lw_Property->currentItem());
-
-    ui->lw_Property->takeItem(index);
-    session->cols.removeAt(index);
-    refresh_cowTable();
 }

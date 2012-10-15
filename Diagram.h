@@ -14,20 +14,20 @@
 class Diagram : public Printable
 {
 private:
-    float                           xAxisStep;
-    float                           yAxisStep;
+    QString                         xAxisName;
+    QString                         yAxisName;
     QMap<float, float>              values;
 public:
     Diagram();//constructor
     ~Diagram();//destructor
 
-    void            setXAxisStep(float xAxisStep);
-    void            setYAxisStep(float yAxisStep);
+    void            setXAxis(QString propertyName);
+    void            setYAxis(QString propertyName);
 
 
     float           getYValues(float xValue);
-    float           getXAxisStep();
-    float           getYAxisStep();
+    QString         getXAxis();
+    QString         getYAxis();
 
     void            addValue(float xValue, float yValue);
     void            calculateAxisSteps();
