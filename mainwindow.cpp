@@ -448,6 +448,7 @@ void MainWindow::on_actionReadFromFile_triggered()
     QFileDialog dialog;
     QString filename = dialog.getOpenFileName();
     session->readNewDataFromFile(filename);
+    refresh_cowTable();
 }
 
 void MainWindow::on_action_Report_DOC_triggered()
@@ -609,6 +610,7 @@ void MainWindow::on_pb_delFilter_clicked()
         session->filter.removeAt(1);
         ui->lw_Filter->takeItem(1);
     }
+    refresh_cowTable();
 }
 
 void MainWindow::on_pb_DelProperty_clicked()
@@ -617,4 +619,5 @@ void MainWindow::on_pb_DelProperty_clicked()
 
     ui->lw_Property->takeItem(index);
     session->cols.removeAt(index);
+    refresh_cowTable();
 }
