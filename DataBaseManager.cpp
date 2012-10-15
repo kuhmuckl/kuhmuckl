@@ -68,6 +68,7 @@ void DataBaseManager::initializeFirst()
                 "farmID nvarchar(10), "
                 "messuredate nvarchar(10), "
                 "messurenb INTEGER, "
+                "nolak INTEGER, "
                 "PRIMARY KEY(lifenb,farmId),"
                 "FOREIGN KEY(farmID) REFERENCES farms(id)"
                 ")");
@@ -185,11 +186,11 @@ bool DataBaseManager::importFromFile(QString fileName)
                 }
                 else
                 {
-                    QString num = line.mid(i,vLen[k]).replace(" ","");
-                    if (num != "")
+                    //QString num = line.mid(i,vLen[k]).replace(" ","");
+                    //if (num != "")
                         cow[line.mid(eventNbLen,vLen[0])].push_back(line.mid(i,vLen[k]).replace(" ",""));
-                    else
-                        cow[line.mid(eventNbLen,vLen[0])].push_back(QString("0"));
+                    //else
+                        //cow[line.mid(eventNbLen,vLen[0])].push_back(QString("0"));
                 }
                 i += vLen[k];
             }
@@ -200,27 +201,51 @@ bool DataBaseManager::importFromFile(QString fileName)
     MLPData.close();
 
     for(CowMap::const_iterator iter = cow.begin(); iter!=cow.end();iter++)
-        query->exec("INSERT INTO cows VALUES ("
-                    "'"+iter.key()+"',"
-                    "'"+iter.value()[6]+"',"
-                    ""+iter.value()[5]+","
-                    ""+iter.value()[18]+","
-                    ""+iter.value()[16]+","
-                    ""+iter.value()[9]+","
-                    ""+iter.value()[10]+","
-                    ""+iter.value()[11]+","
-                    ""+iter.value()[13]+","
-                    ""+iter.value()[12]+","
-                    ""+iter.value()[19]+","
-                    ""+iter.value()[20]+","
-                    ""+iter.value()[22]+","
-                    "'"+farmNb+"',"
-                    "'"+iter.value()[7].right(2)+"."+iter.value()[7].mid(4,2)+"."+iter.value()[7].left(4)+"',"
-                    ""+iter.value()[8]+""
-                    ")");
+    {
+        if (iter.value().length() >= 26)
+            query->exec("INSERT INTO cows VALUES ("
+                        "'"+iter.key()+"',"
+                        "'"+iter.value()[6]+"',"
+                        ""+iter.value()[5]+","
+                        ""+iter.value()[18]+","
+                        ""+iter.value()[16]+","
+                        ""+iter.value()[9]+","
+                        ""+iter.value()[10]+","
+                        ""+iter.value()[11]+","
+                        ""+iter.value()[13]+","
+                        ""+iter.value()[12]+","
+                        ""+iter.value()[19]+","
+                        ""+iter.value()[20]+","
+                        ""+iter.value()[22]+","
+                        "'"+farmNb+"',"
+                        "'"+iter.value()[7].right(2)+"."+iter.value()[7].mid(4,2)+"."+iter.value()[7].left(4)+"',"
+                        ""+iter.value()[8]+","
+                        "0"
+                        ")");
+        else
+            query->exec("INSERT INTO cows VALUES ("
+                        "'"+iter.key()+"',"
+                        "'"+iter.value()[6]+"',"
+                        ""+iter.value()[5]+","
+                        "0,"
+                        "0,"
+                        ""+iter.value()[9]+","
+                        ""+iter.value()[10]+","
+                        ""+iter.value()[11]+","
+                        ""+iter.value()[13]+","
+                        ""+iter.value()[12]+","
+                        "0,"
+                        "0,"
+                        "0,"
+                        "'"+farmNb+"',"
+                        "'"+iter.value()[7].right(2)+"."+iter.value()[7].mid(4,2)+"."+iter.value()[7].left(4)+"',"
+                        ""+iter.value()[8]+","
+                        "1"
+                        ")");
+    }
 
     query->exec("INSERT INTO farms VALUES ('345514', 'Peters Farm', 'Volkmer', 'Peter', 'Dachstraße 9', '03185', 'Drehnow', '098', '097', '', '10.12.1111', '12.12.12')");
-    query->exec("INSERT INTO farms VALUES ('123456', 'Mamas Farm', 'Müller', 'Trauthild', 'Einsamer Weg 42', '12345', 'Cottbus', '112', '1100', 'alte Frau...', '12.13.14', '01.21.2001')");
+    query->exec("INSERT INTO farms VALUES ('81397', 'Mamas Farm', 'Müller', 'Trauthild', 'Einsamer Weg 42', '12345', 'Cottbus', '112', '1100', 'alte Frau...', '12.13.14', '01.21.2001')");
 
     return true;
 }

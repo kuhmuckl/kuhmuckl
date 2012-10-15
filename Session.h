@@ -53,6 +53,7 @@ public:
     QList<QString>          filter;
     QString                 order;
     QString                 farmID;
+    QString                 nolak;
 
     bool            readNewDataFromFile(QString fileName);  //returns true on success
     void            createDiagram(QString xAxisPropertyName, QString yAxisPropertyName, QGraphicsScene* scene);

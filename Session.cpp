@@ -7,6 +7,7 @@ Session::Session()
     diagram = new Diagram();
     report = new Report();
     dataBaseManager = new DataBaseManager();
+    this->nolak = "0";
 }
 
 Session::Session(const Session &session)
@@ -25,6 +26,8 @@ Session::Session(const Session &session)
 
     this->diagram = new Diagram(*session.diagram);
     this->report  = new Report(*session.report);
+
+    this->nolak = "0";
 }
 
 Session::~Session()
@@ -128,9 +131,11 @@ QString Session::getNextFreeFileName()
     QStringList flist = dir.entryList(fileFilter);
 
     int i = 0;
-    while((i<flist.length()) && (flist[i] == "table"+QString::number(i)+".tbl"))
+    while((i<flist.length()) && (flist[i] == "table"+QString("%1").arg(i, 4, 10, QChar('0'))+".tbl"))
         i++;
 
-    return "table"+QString::number(i)+".tbl";
+
+
+    return "table"+QString("%1").arg(i, 4, 10, QChar('0'))+".tbl";
 
 }
