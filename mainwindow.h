@@ -9,6 +9,11 @@
 
 #include "Session.h"
 
+#include <qfile.h>
+#include <qtextstream.h>
+#include <QInputDialog>
+#include <QDialogButtonBox>
+
 /**
   Mainly auto-generated Headerfile to manage
   events and global variables.
@@ -117,9 +122,15 @@ private slots:
 
     void on_pb_DelProperty_clicked();
 
-    void on_pushButton_clicked();
-
     void on_pb_propertyUp_clicked();
+
+    void on_pb_propertyDown_clicked();
+
+    void on_pb_FilterUp_clicked();
+
+    void on_pb_FilterDown_clicked();
+
+    void on_sb_saveTable_clicked();
 
 private:
     Ui::MainWindow  *ui;

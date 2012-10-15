@@ -10,6 +10,7 @@
 #include "Animal.h"
 #include "Cow.h"
 #include "DataBaseManager.h"
+#include <QDir>
 
 /**Session class
     Contains and manages all functions used by the User Interface.
@@ -43,6 +44,7 @@ public:
     Animal*         getActiveAnimal();
     Farm*           getFarm(unsigned int index);
     Farm*           getActiveFarm();
+    QString         getNextFreeFileName();
 
     QMap<QString, QString>  colTrans;                       //Name of the col to the shown name
     QList<QString>          tableCon;                       //table configurations

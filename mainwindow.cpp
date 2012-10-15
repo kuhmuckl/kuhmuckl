@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <qfile.h>
-#include <qtextstream.h>
 
 /**********************************************************
   Initialization and Finalization
@@ -128,7 +126,7 @@ void MainWindow::on_actionReset_triggered()
     session->colTrans["farms.changedate"]="'letzte Änderung'";
 
     refresh_tableCon();
-    load_Table(0);
+    if (session->tableCon.length() > 0) load_Table(0);
     refresh_cowTable();
     refresh_farmTable();
 }
@@ -182,10 +180,7 @@ void MainWindow::load_Table(int nb)
 
         germanFilter.append((session->colTrans[l[bias]]).mid(1,session->colTrans[l[bias]].length()-2)+" ");
 
-        if (l[bias+1] == "<>")
-            germanFilter.append("? ");
-        else
-            germanFilter.append(l[bias+1]+" ");
+        germanFilter.append(l[bias+1]+" ");
 
         for (int i=bias+2;i<l.length();i++)
             germanFilter.append(l[i]);
@@ -290,19 +285,21 @@ void MainWindow::on_changeConfig(int index)
 */
 void MainWindow::on_pb_FarmsSelectMarked_clicked()
 {
-    ui->tab_Cows->setEnabled(true);
-    ui->menuDataSet->setEnabled(true);
-    ui->tab_Diagram->setEnabled(true);
-    ui->menuDiagram->setEnabled(true);
-    ui->tab_Report->setEnabled(true);
-    ui->menuReport->setEnabled(true);
-    //session->setActiveFarm(&session->getFarm(index?));
-
     int row;
 
     QModelIndexList selectedList = ui->tv_Farms->selectionModel()->selectedRows();
     if (selectedList.count()>0)
+    {
         row = selectedList.at(0).row();
+
+        ui->tab_Cows->setEnabled(true);
+        ui->menuDataSet->setEnabled(true);
+        ui->tab_Diagram->setEnabled(true);
+        ui->menuDiagram->setEnabled(true);
+        ui->tab_Report->setEnabled(true);
+        ui->menuReport->setEnabled(true);
+        //session->setActiveFarm(&session->getFarm(index?));
+    }
     else
         QMessageBox::information(this,"", "Bitte Betrieb auswählen");
 
@@ -407,7 +404,6 @@ void MainWindow::on_pb_AddAndFilter_clicked()
         ui->lw_Filter->addItem(new QListWidgetItem(
             "UND "+filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
-        if (filterOperator == "?")filterOperator = "<>";
         session->filter.append("AND "+session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
     }
     else
@@ -415,7 +411,6 @@ void MainWindow::on_pb_AddAndFilter_clicked()
         ui->lw_Filter->addItem(new QListWidgetItem(
                                    filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
-        if (filterOperator == "?")filterOperator = "<>";
         session->filter.append(session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
     }
     refresh_cowTable();
@@ -435,7 +430,6 @@ void MainWindow::on_pb_AddOrFilter_clicked()
         ui->lw_Filter->addItem(new QListWidgetItem(
             "ODER "+filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
-        if (filterOperator == "?")filterOperator = "<>";
         session->filter.append("OR "+session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
     }
     else
@@ -443,7 +437,6 @@ void MainWindow::on_pb_AddOrFilter_clicked()
         ui->lw_Filter->addItem(new QListWidgetItem(
             filterName+" "+filterOperator+" '"+filterValue+"'"
         ));
-        if (filterOperator == "?")filterOperator = "<>";
         session->filter.append(session->colTrans.key("'"+filterName+"'")+" "+filterOperator+" '"+filterValue+"'");
     }
     refresh_cowTable();
@@ -644,5 +637,116 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_pb_propertyUp_clicked()
 {
     int index = ui->lw_Property->row(ui->lw_Property->currentItem());
-    ui->lw_Property->insertItem(index-1,ui->lw_Property->takeItem(index));
+    if (index > 0)
+    {
+        session->cols.insert(index,session->cols.takeAt(index-1));
+
+        ui->lw_Property->insertItem(index-1,ui->lw_Property->takeItem(index));
+        ui->lw_Property->setCurrentRow(index-1);
+    }
+    refresh_cowTable();
+}
+
+void MainWindow::on_pb_propertyDown_clicked()
+{
+    int index = ui->lw_Property->row(ui->lw_Property->currentItem());
+    if (index < ui->lw_Property->count()-1)
+    {
+        session->cols.insert(index,session->cols.takeAt(index+1));
+
+        ui->lw_Property->insertItem(index+1,ui->lw_Property->takeItem(index));
+        ui->lw_Property->setCurrentRow(index+1);
+    }
+    refresh_cowTable();
+}
+
+void MainWindow::on_pb_FilterUp_clicked()
+{
+    int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
+    if (index > 0)
+    {
+        session->cols.insert(index,session->cols.takeAt(index-1));
+
+        ui->lw_Filter->insertItem(index-1,ui->lw_Filter->takeItem(index));
+        ui->lw_Filter->setCurrentRow(index-1);
+    }
+    refresh_cowTable();
+}
+
+void MainWindow::on_pb_FilterDown_clicked()
+{
+    int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
+    if (index < ui->lw_Filter->count()-1)
+    {
+        session->cols.insert(index,session->cols.takeAt(index+1));
+
+        ui->lw_Filter->insertItem(index+1,ui->lw_Filter->takeItem(index));
+        ui->lw_Filter->setCurrentRow(index+1);
+    }
+    refresh_cowTable();
+}
+
+void MainWindow::on_sb_saveTable_clicked()
+{
+    bool ok;
+    QInputDialog iDial;
+    iDial.setCancelButtonText("Abbrechen");
+    iDial.setOkButtonText("Speichern");
+    QString text = iDial.getText(this, "Speichern","Bitte Tabellennamen eingeben:",QLineEdit::Normal,"",&ok);
+
+    if (ok && !text.isEmpty())
+    {
+        QString fileName = session->getNextFreeFileName();
+
+        QDir dir("");
+        QStringList fileFilter;
+        fileFilter.append("*.tbl");
+        QStringList flist = dir.entryList(fileFilter);
+
+        for(int i=0;i<flist.length();i++)
+        {
+            QFile lTable(flist[i]);
+            lTable.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream stream(&lTable);
+            QString title = stream.readLine();
+            lTable.close();
+            if (title == text)
+            {
+                ok = false;
+                fileName = flist[i];
+                break;
+            }
+        }
+
+        if (!ok)
+        {
+            QMessageBox mB;
+            mB.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+            mB.setText("Diese Tabelle ist schon vorhanden. Überschreiben?");
+            mB.setWindowTitle("Überschreiben");
+            mB.setButtonText(1,"Speichern");
+            mB.setButtonText(2,"NICHT Speichern");
+
+            if (mB.exec() == QMessageBox::Ok)
+                ok = true;
+        }
+
+        if (ok)
+        {
+            QFile writeFile(fileName);
+            writeFile.open(QFile::WriteOnly | QFile::Truncate);
+            QTextStream stream(&writeFile);
+            stream << text+"\r\n";
+            for (int i=0;i<session->cols.length();i++)
+                stream << session->cols[i]+"\r\n";
+            stream << "#\r\n";
+            for (int i=0;i<session->filter.length();i++)
+                stream << session->filter[i]+"\r\n";
+            stream << "#\r\n";
+            stream << session->order+"\r\n";
+            stream << "###";
+
+            writeFile.close();
+        }
+    }
 }

@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
@@ -875,7 +875,7 @@
                    </item>
                    <item>
                     <property name="text">
-                     <string>≠</string>
+                     <string>&lt;&gt;</string>
                     </property>
                    </item>
                   </widget>

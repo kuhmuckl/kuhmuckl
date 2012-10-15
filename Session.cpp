@@ -99,7 +99,8 @@ bool Session::readNewDataFromFile(QString fileName)
     return success;
 }
 
-void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName){
+void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName)
+{
     QSqlQuery query(getSQLDatabase());
     query.exec("SELECT "+xAxisPropertyName+
                ", "+yAxisPropertyName+" FROM cows "+
@@ -111,4 +112,19 @@ void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName
     else
         mb.setText("SELECT nicht ausgeführt!");
     mb.exec();
+}
+
+QString Session::getNextFreeFileName()
+{
+    QDir dir("");
+    QStringList fileFilter;
+    fileFilter.append("*.tbl");
+    QStringList flist = dir.entryList(fileFilter);
+
+    int i = 0;
+    while((i<flist.length()) && (flist[i] == "table"+QString::number(i)+".tbl"))
+        i++;
+
+    return "table"+QString::number(i)+".tbl";
+
 }
