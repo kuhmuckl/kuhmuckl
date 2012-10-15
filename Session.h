@@ -3,6 +3,7 @@
 
 
 #include <QVector>
+#include <QGraphicsScene>
 
 #include "Farm.h"
 #include "Report.h"
@@ -54,7 +55,7 @@ public:
     QString                 farmID;
 
     bool            readNewDataFromFile(QString fileName);  //returns true on success
-    void            createDiagram(QString xAxisPropertyName, QString yAxisPropertyName);
+    void            createDiagram(QString xAxisPropertyName, QString yAxisPropertyName, QGraphicsScene* scene);
     void            setActiveAnimal(unsigned int index);
     void            setActiveFarm(unsigned int index);
 };

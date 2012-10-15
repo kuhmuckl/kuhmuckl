@@ -99,19 +99,25 @@ bool Session::readNewDataFromFile(QString fileName)
     return success;
 }
 
-void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName)
-{
+void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName, QGraphicsScene* scene){
     QSqlQuery query(getSQLDatabase());
-    query.exec("SELECT "+xAxisPropertyName+
-               ", "+yAxisPropertyName+" FROM cows "+
+    query.exec("SELECT "+colTrans.keys(xAxisPropertyName).at(0)+
+               ", "+colTrans.keys(yAxisPropertyName).at(0)+" FROM cows "+
                "JOIN farms ON  cows.farmID=farms.ID "+
                "WHERE (cows.farmID="+farmID+")");
-    QMessageBox mb;
-    if(query.isSelect())
-        mb.setText(query.value(1).toString());
-    else
+    diagram->setXAxisName(xAxisPropertyName);
+    diagram->setYAxisName(yAxisPropertyName);
+    if(query.isSelect()){
+        diagram->setScene(scene);
+        while(query.next())
+            diagram->addValue(query.value(0).toFloat(),
+                              query.value(1).toFloat());
+        diagram->draw(xAxisPropertyName+"-"+yAxisPropertyName+"-Diagramm");
+    }else{
+        QMessageBox mb;
         mb.setText("SELECT nicht ausgeführt!");
-    mb.exec();
+        mb.exec();
+    }
 }
 
 QString Session::getNextFreeFileName()
