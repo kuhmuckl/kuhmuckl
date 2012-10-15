@@ -98,3 +98,17 @@ bool Session::readNewDataFromFile(QString fileName)
 
     return success;
 }
+
+void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName){
+    QSqlQuery query(getSQLDatabase());
+    query.exec("SELECT "+xAxisPropertyName+
+               ", "+yAxisPropertyName+" FROM cows "+
+               "JOIN farms ON  cows.farmID=farms.ID "+
+               "WHERE (cows.farmID="+farmID+")");
+    QMessageBox mb;
+    if(query.isSelect())
+        mb.setText(query.value(1).toString());
+    else
+        mb.setText("SELECT nicht ausgeführt!");
+    mb.exec();
+}

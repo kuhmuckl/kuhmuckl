@@ -1,8 +1,8 @@
 #include "Diagram.h"
 
 Diagram::Diagram():
-    xAxisStep(0),
-  yAxisStep(0)
+    xAxisName("x"),
+    yAxisName("y")
 {
     values.clear();
 }
@@ -12,20 +12,20 @@ Diagram::~Diagram()
     values.clear();
 }
 
-float Diagram::getXAxisStep(){
-    return xAxisStep;
+QString Diagram::getXAxis(){
+    return xAxisName;
 }
 
-float Diagram::getYAxisStep(){
-    return yAxisStep;
+QString Diagram::getYAxis(){
+    return yAxisName;
 }
 
-void Diagram::setXAxisStep(float xAxisStep){
-    this->xAxisStep = xAxisStep;
+void Diagram::setXAxisName(QString propertyName){
+    this->xAxisName = propertyName;
 }
 
-void Diagram::setYAxisStep(float yAxisStep){
-    this->yAxisStep = yAxisStep;
+void Diagram::setYAxisName(QString propertyName){
+    this->yAxisName = propertyName;
 }
 
 void Diagram::addValue(float xValue, float yValue){
@@ -38,7 +38,7 @@ float Diagram::getYValues(float xValue){
 
 void Diagram::calculateAxisSteps()
 {
-    xAxisStep = yAxisStep = 10;
+    xAxisName = yAxisName = 10;
 }
 
 bool Diagram::exportAsSVG(QString fileName)

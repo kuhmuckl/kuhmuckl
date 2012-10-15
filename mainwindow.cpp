@@ -360,6 +360,8 @@ about single cow, xAxis and yAxis
 */
 void MainWindow::on_pb_CreatDiagram_clicked()
 {
+    session->createDiagram(ui->cob_XAxis->currentText(),
+                           ui->cob_YAxis->currentText());
     //calculating axis, draw things and create models
 }
 

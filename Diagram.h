@@ -21,8 +21,8 @@ public:
     Diagram();//constructor
     ~Diagram();//destructor
 
-    void            setXAxis(QString propertyName);
-    void            setYAxis(QString propertyName);
+    void            setXAxisName(QString propertyName);
+    void            setYAxisName(QString propertyName);
 
 
     float           getYValues(float xValue);
