@@ -641,5 +641,6 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_pb_propertyUp_clicked()
 {
-
+    int index = ui->lw_Property->row(ui->lw_Property->currentItem());
+    ui->lw_Property->insertItem(index-1,ui->lw_Property->takeItem(index));
 }
