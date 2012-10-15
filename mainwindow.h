@@ -117,8 +117,6 @@ private slots:
 
     void on_pb_DelProperty_clicked();
 
-    void on_pushButton_clicked();
-
     void on_pb_propertyUp_clicked();
 
 private:

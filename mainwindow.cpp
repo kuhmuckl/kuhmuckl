@@ -360,8 +360,12 @@ about single cow, xAxis and yAxis
 */
 void MainWindow::on_pb_CreatDiagram_clicked()
 {
+    QGraphicsScene* scene = new QGraphicsScene(0,0,ui->gv_Diagram->width()-10,
+                                               ui->gv_Diagram->height()-10);
     session->createDiagram(ui->cob_XAxis->currentText(),
-                           ui->cob_YAxis->currentText());
+                           ui->cob_YAxis->currentText(),
+                           scene);
+    ui->gv_Diagram->setScene(scene);
     //calculating axis, draw things and create models
 }
 
