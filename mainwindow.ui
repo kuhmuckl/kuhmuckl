@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
@@ -440,10 +440,29 @@
             <widget class="QComboBox" name="cob_TableCh"/>
            </item>
            <item>
-            <widget class="QPushButton" name="sb_saveTable">
-             <property name="text">
-              <string>Speichern</string>
+            <widget class="QFrame" name="frame_10">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <item>
+               <widget class="QPushButton" name="sb_saveTable">
+                <property name="text">
+                 <string>Speichern</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_loadTable">
+                <property name="text">
+                 <string>Laden</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>

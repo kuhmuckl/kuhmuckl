@@ -754,3 +754,8 @@ void MainWindow::on_sb_saveTable_clicked()
         }
     }
 }
+
+void MainWindow::on_pb_loadTable_clicked()
+{
+
+}
