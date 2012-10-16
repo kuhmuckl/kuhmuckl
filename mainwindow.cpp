@@ -500,21 +500,18 @@ void MainWindow::on_action_Report_DOC_triggered()
 {
     QFileDialog dialog;
     QString filename = dialog.getSaveFileName();
-    session->getReport()->exportAsDOC(filename);
 }
 
 void MainWindow::on_action_Report_PDF_triggered()
 {
     QFileDialog dialog;
     QString filename = dialog.getSaveFileName();
-    session->getReport()->exportAsPDF(filename);
 }
 
 void MainWindow::on_action_Report_TextFile_triggered()
 {
     QFileDialog dialog;
     QString filename = dialog.getSaveFileName();
-    session->getReport()->exportAsTextFile(filename);
 }
 
 void MainWindow::on_actionPrintReport_triggered()
@@ -551,8 +548,8 @@ void MainWindow::on_actionPrintDiagram_triggered()
 void MainWindow::on_actionLoadDiagramTemplate_triggered()
 {
     QFileDialog dialog;
-    QString filename = dialog.getOpenFileName();
-    session->getDiagram()->print();
+    QString fileName = dialog.getOpenFileName();
+    session->getDiagram()->loadLayoutFromFile(fileName);
 }
 
 void MainWindow::on_actionSaveDiagramTemplate_triggered()
@@ -562,78 +559,80 @@ void MainWindow::on_actionSaveDiagramTemplate_triggered()
     session->getDiagram()->saveLayoutToFile(filename);
 }
 
-void MainWindow::on_actionNewDiagramTemplate_triggered()
-{
-    //reset diagram axis
-}
-
-void MainWindow::on_actionNewReportTemplate_triggered()
-{
-    // reset report Values .. destroy and create new?
-}
-
 void MainWindow::on_actionSaveReportTemplate_triggered()
 {
-    QFileDialog dialog;
-    QString filename = dialog.getSaveFileName();
-    session->getReport()->saveLayoutToFile(filename);
+    on_sb_saveTable_clicked();
 }
 
-void MainWindow::on_actionLoadReportTemplate_triggered()
-{
-    QFileDialog dialog;
-    QString filename = dialog.getOpenFileName();
-    session->getReport()->loadLayoutFromFile(filename);
-}
 
 void MainWindow::on_action_ToSaveMyTemplates_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("Entweder in der Menüleiste auf Diagramm oder Kuhtabelle klicken und Vorlage speichern auswählen.");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToReadNewData_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToPrint_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_AreTabsDisabled_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToCreateReports_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToCreateDiagrams_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToCheckCowDetails_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_action_ToChoseAFarm_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_actionTeam_triggered()
 {
-    //Simple QMessagebox should be enough, mybe including our logo
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 void MainWindow::on_actionAbout_triggered()
 {
-    //Simple QMessagebox should be enough
+    QMessageBox mb;
+    mb.setText("...");
+    mb.exec();
 }
 
 /**********************************************************

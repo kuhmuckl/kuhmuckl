@@ -176,15 +176,18 @@ bool Diagram::exportAsPDF(QString fileName)
 bool Diagram::saveLayoutToFile(QString fileName)
 {
     bool success = false;
-    //Save Axis to Filename
+    QMessageBox mb;
+    mb.setText("Datei ist fehlerhaft!");
+    mb.exec();
     return success;
 }
 
 bool Diagram::loadLayoutFromFile(QString fileName)
 {
     bool success = false;
-    //load last Axis configuration
-    //maybe source?
+    QMessageBox mb;
+    mb.setText("Datei ist fehlerhaft!");
+    mb.exec();
     return success;
 }
 

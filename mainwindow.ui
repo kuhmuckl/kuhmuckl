@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_Farm">
        <attribute name="title">
@@ -148,7 +148,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidgetCows">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_Cows_Home">
            <attribute name="title">
@@ -1002,8 +1002,6 @@
     </widget>
     <addaction name="menuRecentlyUsedReports"/>
     <addaction name="separator"/>
-    <addaction name="actionNewReportTemplate"/>
-    <addaction name="actionLoadReportTemplate"/>
     <addaction name="actionSaveReportTemplate"/>
     <addaction name="separator"/>
     <addaction name="menuExportReport"/>
@@ -1041,7 +1039,6 @@
     </widget>
     <addaction name="menuRecentlyUsedDiagrams"/>
     <addaction name="separator"/>
-    <addaction name="actionNewDiagramTemplate"/>
     <addaction name="actionSaveDiagramTemplate"/>
     <addaction name="actionLoadDiagramTemplate"/>
     <addaction name="separator"/>
