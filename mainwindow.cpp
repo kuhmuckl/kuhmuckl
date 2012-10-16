@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fillComboBox(ui->cob_XAxis);
     fillComboBox(ui->cob_YAxis);
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 /** Form destructor
@@ -307,6 +308,8 @@ void MainWindow::on_pb_FarmsSelectMarked_clicked()
     session->farmID = farmModel->data(zelle, Qt::DisplayRole).toString();
 
     refresh_cowTable();
+    ui->tabWidget->setCurrentIndex(1);
+    ui->tabWidgetCows->setCurrentIndex(0);
 }
 
 /** Button for searching a farm and marking it

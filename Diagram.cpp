@@ -44,8 +44,7 @@ void Diagram::calculateAxisSteps()
     minX=minY=INITIAL_MAXIMUM;
     maxX=maxY=0;
     QList<ValuePair>::const_iterator it = values.begin();
-    while(it != values.end()){
-        it++;
+    while(++it != values.end()){
         minX=minX>(*it).first?(*it).first:minX;
         maxX=maxX<(*it).first?(*it).first:maxX;
         minY=minY>(*it).second?(*it).second:minY;
@@ -110,15 +109,14 @@ void Diagram::drawYAxis(QPainter& p){
 }
 
 void Diagram::drawValues(QPainter& p){
-    p.setPen(QPen(QBrush(Qt::black),3));
+    p.setPen(QPen(QBrush(Qt::black),1));
     QList<ValuePair>::const_iterator it = values.begin();
-    while(it != values.end()){
-        it++;
-        int x = (*it).first;
-        int y = (*it).second;
-        y = pixmap->height()-2*DISTANCE;
+    while(++it != values.end()){
+        float x = (*it).first;
+        float y = (*it).second;
         x = x/xAxisStep*STEP;
-        y -= y/yAxisStep*STEP;
+        y = y/yAxisStep*STEP;
+        y = pixmap->height()-2*DISTANCE -y;
         x += 2*DISTANCE;
         p.drawLine(x-CROSS_LENGTH, y-CROSS_LENGTH,
                    x+CROSS_LENGTH, y+CROSS_LENGTH);
@@ -171,8 +169,7 @@ bool Diagram::exportAsJPG(QString fileName)
 bool Diagram::exportAsPDF(QString fileName)
 {
     bool success = false;
-    //Convert Data to PDF
-    //Store SVG to Filename
+
     return success;
 }
 

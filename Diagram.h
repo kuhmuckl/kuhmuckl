@@ -10,6 +10,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QMessageBox>
+#include <QDebug>
 
 /**
   Diagram class to save and load diagram layouts
