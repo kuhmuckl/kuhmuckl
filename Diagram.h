@@ -3,7 +3,7 @@
 
 #include "Printable.h"
 
-#include <QMap>
+#include <QList>
 #include <QString>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
@@ -19,14 +19,17 @@
 class Diagram : public Printable
 {
 private:
-    static const int STEP = 30;
+    static const int STEP = 70;
+    static const int DISTANCE = 15;
+    static const int CROSS_LENGTH = 3;
     QString                         xAxisName;
     QString                         yAxisName;
     float                           xAxisStep;
     float                           yAxisStep;
     float                           minX;
     float                           minY;
-    QMap<float, float>              values;
+    typedef QPair<float,float> ValuePair;
+    QList<ValuePair>                values;
     QGraphicsScene*                 scene;
     QPixmap*                         pixmap;
 protected:
@@ -45,7 +48,6 @@ public:
     void            setScene(QGraphicsScene* scene);
 
 
-    float           getYValues(float xValue);
     QString         getXAxis();
     QString         getYAxis();
 

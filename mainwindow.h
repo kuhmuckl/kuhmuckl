@@ -132,6 +132,8 @@ private slots:
 
     void on_sb_saveTable_clicked();
 
+    void on_pb_loadTable_clicked();
+
 private:
     Ui::MainWindow  *ui;
     Session*        session;

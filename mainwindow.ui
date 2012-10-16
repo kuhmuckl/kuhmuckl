@@ -458,7 +458,7 @@
               <item>
                <widget class="QPushButton" name="pb_loadTable">
                 <property name="text">
-                 <string>Laden</string>
+                 <string>Löschen</string>
                 </property>
                </widget>
               </item>

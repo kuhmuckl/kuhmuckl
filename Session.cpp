@@ -4,7 +4,7 @@
 
 Session::Session()
 {
-    diagram = new Diagram();
+    diagram = 0;
     report = new Report();
     dataBaseManager = new DataBaseManager();
 }
@@ -23,7 +23,7 @@ Session::Session(const Session &session)
         farms.push_back(new Farm(*farm));
 
 
-    this->diagram = new Diagram(*session.diagram);
+    this->diagram = diagram?new Diagram(*session.diagram):0;
     this->report  = new Report(*session.report);
 }
 
@@ -39,7 +39,8 @@ Session::~Session()
     farms.clear();
 
     delete report;
-    delete diagram;
+    if(diagram)
+        delete diagram;
     delete dataBaseManager;
 
 }
@@ -105,13 +106,17 @@ void Session::createDiagram(QString xAxisPropertyName, QString yAxisPropertyName
                ", "+colTrans.keys(yAxisPropertyName).at(0)+" FROM cows "+
                "JOIN farms ON  cows.farmID=farms.ID "+
                "WHERE (cows.farmID="+farmID+")");
+    if(diagram)
+        delete diagram;
+    diagram = new Diagram();
     diagram->setXAxisName(xAxisPropertyName);
     diagram->setYAxisName(yAxisPropertyName);
     if(query.isSelect()){
         diagram->setScene(scene);
-        while(query.next())
+        while(query.next()){
             diagram->addValue(query.value(0).toFloat(),
                               query.value(1).toFloat());
+        }
         diagram->draw(xAxisPropertyName+"-"+yAxisPropertyName+"-Diagramm");
     }else{
         QMessageBox mb;
