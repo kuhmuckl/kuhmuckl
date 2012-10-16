@@ -88,13 +88,7 @@ private slots:
 
     void on_actionSaveDiagramTemplate_triggered();
 
-    void on_actionNewDiagramTemplate_triggered();
-
-    void on_actionNewReportTemplate_triggered();
-
     void on_actionSaveReportTemplate_triggered();
-
-    void on_actionLoadReportTemplate_triggered();
 
     void on_action_ToSaveMyTemplates_triggered();
 
@@ -135,6 +129,8 @@ private slots:
     void on_pb_delTable_clicked();
 
     void on_cob_nolak_stateChanged(int arg1);
+
+    void on_cob_Order_activated(const QString &arg1);
 
 private:
     Ui::MainWindow  *ui;

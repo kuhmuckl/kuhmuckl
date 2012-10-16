@@ -30,11 +30,13 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             ui->cob_Property->addItem(iter.value().mid(1,iter.value().length()-2));
             ui->cob_FilterName->addItem(iter.value().mid(1,iter.value().length()-2));
+            ui->cob_Order->addItem(iter.value().mid(1,iter.value().length()-2));
         }
 
     fillComboBox(ui->cob_XAxis);
     fillComboBox(ui->cob_YAxis);
     ui->tabWidget->setCurrentIndex(0);
+    ui->cob_Order->setCurrentIndex(ui->cob_Order->findText(session->colTrans[session->order].mid(1,session->colTrans[session->order].length()-2)));
 }
 
 /** Form destructor
@@ -783,5 +785,11 @@ void MainWindow::on_pb_delTable_clicked()
 void MainWindow::on_cob_nolak_stateChanged(int arg1)
 {
     session->nolak = QString::number(arg1/2);
+    refresh_cowTable();
+}
+
+void MainWindow::on_cob_Order_activated(const QString &arg1)
+{
+    session->order = session->colTrans.key("'"+ui->cob_Order->currentText()+"'");
     refresh_cowTable();
 }

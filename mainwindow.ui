@@ -447,6 +447,9 @@
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="cob_Order"/>
+        </item>
+        <item>
          <widget class="QFrame" name="frame_9">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
