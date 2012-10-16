@@ -186,7 +186,6 @@ void MainWindow::load_Table(int nb)
             germanFilter.append(l[i]);
 
         ui->lw_Filter->addItem(germanFilter);
-
     }
 }
 
@@ -226,7 +225,7 @@ void MainWindow::refresh_cowTable()
     //Remove last ","
     statement.remove(statement.length()-2,1);
 
-    statement.append("FROM cows JOIN farms ON cows.farmID=farms.ID WHERE (cows.farmID="+session->farmID+" ");
+    statement.append("FROM cows JOIN farms ON cows.farmID=farms.ID WHERE (cows.nolak="+session->nolak+" AND cows.farmID="+session->farmID+" ");
 
     if (session->filter.length() > 0)
         statement.append("AND (");
@@ -753,9 +752,25 @@ void MainWindow::on_sb_saveTable_clicked()
             writeFile.close();
         }
     }
+    refresh_tableCon();
 }
 
-void MainWindow::on_pb_loadTable_clicked()
+void MainWindow::on_pb_delTable_clicked()
 {
+    QMessageBox mB;
+    mB.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+    mB.setText("Sicher dass diese Konfiguration gelöscht werden soll?");
+    mB.setWindowTitle("Tabelle löschen");
+    mB.setButtonText(1,"Ja");
+    mB.setButtonText(2,"Nein, abbrechen!");
 
+    if (mB.exec() == QMessageBox::Ok)
+        QFile::remove(session->tableCon[ui->cob_TableCh->currentIndex()]);
+    refresh_tableCon();
+}
+
+void MainWindow::on_cob_nolak_stateChanged(int arg1)
+{
+    session->nolak = QString::number(arg1/2);
+    refresh_cowTable();
 }

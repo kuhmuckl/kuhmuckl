@@ -132,7 +132,9 @@ private slots:
 
     void on_sb_saveTable_clicked();
 
-    void on_pb_loadTable_clicked();
+    void on_pb_delTable_clicked();
+
+    void on_cob_nolak_stateChanged(int arg1);
 
 private:
     Ui::MainWindow  *ui;
