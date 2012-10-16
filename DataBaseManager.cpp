@@ -222,7 +222,7 @@ bool DataBaseManager::importFromFile(QString fileName)
                         ""+iter.value()[8]+","
                         "0"
                         ")");
-        else
+        else if (iter.value().length() >= 16)
             query->exec("INSERT INTO cows VALUES ("
                         "'"+iter.key()+"',"
                         "'"+iter.value()[6]+"',"
@@ -244,8 +244,9 @@ bool DataBaseManager::importFromFile(QString fileName)
                         ")");
     }
 
-    query->exec("INSERT INTO farms VALUES ('345514', 'Peters Farm', 'Volkmer', 'Peter', 'Dachstraße 9', '03185', 'Drehnow', '098', '097', '', '10.12.1111', '12.12.12')");
-    query->exec("INSERT INTO farms VALUES ('81397', 'Mamas Farm', 'Müller', 'Trauthild', 'Einsamer Weg 42', '12345', 'Cottbus', '112', '1100', 'alte Frau...', '12.13.14', '01.21.2001')");
+    query->exec("INSERT INTO farms VALUES ('345514', 'Milchbauernhof Dobler', 'Dobler', 'Matthias', 'Stammheimer Sraße 51', '71634', 'Ludwigsburg', '07734/98723', '07734 98723', '', '10.12.1111', '12.12.12')");
+    query->exec("INSERT INTO farms VALUES ('81397', 'Bauernhof Zolg', 'Zolg', 'Harald', 'Hanglerhof 4', '78244', 'Gottmadingen', '07734/6832', '07734/6832', '', '12.13.14', '01.21.2001')");
+    query->exec("INSERT INTO farms VALUES ('2180540', 'Betriebsgemeinschaft Schienerberg', 'Kienzler, Wiedenbach', 'Ralf, Klaus', 'Hof Langenmoos 13', '78337', 'Öhningen', '07735-8988', '07735-98700', '', '12.13.14', '01.21.2001')");
 
     return true;
 }

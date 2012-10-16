@@ -114,7 +114,7 @@ void MainWindow::on_actionReset_triggered()
     session->colTrans["cows.messuredate"]="'Messdatum'";
     session->colTrans["cows.messurenb"]="'Prüfnummer'";
     session->colTrans["farms.id"]="'Betriebs-Nummer'";
-    session->colTrans["farms.name"]="'Betriebs-name'";
+    session->colTrans["farms.name"]="'Betriebsname'";
     session->colTrans["farms.lastname"]="'Besitzer Nachname'";
     session->colTrans["farms.firstname"]="'Besitzer Vorname'";
     session->colTrans["farms.street"]="'Straße'";
@@ -242,6 +242,7 @@ void MainWindow::refresh_cowTable()
     QSqlQuery query(session->getSQLDatabase());
     query.exec(statement);
     cowModel->setQuery(query);
+    ui->tv_Cows->resizeColumnsToContents();
 }
 
 void MainWindow::refresh_farmTable()
@@ -260,6 +261,7 @@ void MainWindow::refresh_farmTable()
     QSqlQuery query(session->getSQLDatabase());
     query.exec(statement);
     farmModel->setQuery(query);
+    ui->tv_Farms->resizeColumnsToContents();
 }
 
 void MainWindow::on_changeConfig(int index)
@@ -298,18 +300,17 @@ void MainWindow::on_pb_FarmsSelectMarked_clicked()
         ui->menuDiagram->setEnabled(true);
         ui->tab_Report->setEnabled(true);
         ui->menuReport->setEnabled(true);
-        //session->setActiveFarm(&session->getFarm(index?));
+        QModelIndex zelle = farmModel->index(row, 0, QModelIndex()); // row, column
+        session->farmID = farmModel->data(zelle, Qt::DisplayRole).toString();
+
+        refresh_cowTable();
+        ui->tabWidget->setCurrentIndex(1);
+        ui->tabWidgetCows->setCurrentIndex(0);
     }
     else
         QMessageBox::information(this,"", "Bitte Betrieb auswählen");
 
 
-    QModelIndex zelle = farmModel->index(row, 0, QModelIndex()); // row, column
-    session->farmID = farmModel->data(zelle, Qt::DisplayRole).toString();
-
-    refresh_cowTable();
-    ui->tabWidget->setCurrentIndex(1);
-    ui->tabWidgetCows->setCurrentIndex(0);
 }
 
 /** Button for searching a farm and marking it
@@ -767,8 +768,10 @@ void MainWindow::on_pb_delTable_clicked()
     mB.setButtonText(2,"Nein, abbrechen!");
 
     if (mB.exec() == QMessageBox::Ok)
+    {
         QFile::remove(session->tableCon[ui->cob_TableCh->currentIndex()]);
-    refresh_tableCon();
+        refresh_tableCon();
+    }
 }
 
 void MainWindow::on_cob_nolak_stateChanged(int arg1)
