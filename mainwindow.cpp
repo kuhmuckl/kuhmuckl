@@ -492,7 +492,10 @@ void MainWindow::on_pb_DelProperty_clicked()
 void MainWindow::on_actionReadFromFile_triggered()
 {
     QFileDialog dialog;
-    QString filename = dialog.getOpenFileName();
+    dialog.setNameFilter("Tabellen (*.tbl)");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "",
+                                                    tr("LKV-Daten (*.A*);;Alle Dateien (*.*)"));
     session->readNewDataFromFile(filename);
     refresh_cowTable();
 }
@@ -669,7 +672,7 @@ void MainWindow::on_pb_propertyDown_clicked()
 void MainWindow::on_pb_FilterUp_clicked()
 {
     int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
-    if (index > 0)
+    if (index > 1)
     {
         session->cols.insert(index,session->cols.takeAt(index-1));
 
@@ -682,7 +685,7 @@ void MainWindow::on_pb_FilterUp_clicked()
 void MainWindow::on_pb_FilterDown_clicked()
 {
     int index = ui->lw_Filter->row(ui->lw_Filter->currentItem());
-    if (index < ui->lw_Filter->count()-1)
+    if ((index < ui->lw_Filter->count()-1)&&(index>0))
     {
         session->cols.insert(index,session->cols.takeAt(index+1));
 
@@ -753,9 +756,12 @@ void MainWindow::on_sb_saveTable_clicked()
             stream << "###";
 
             writeFile.close();
+
+            refresh_tableCon();
+            ui->cob_TableCh->setCurrentIndex(ui->cob_TableCh->findText(text));
+
         }
     }
-    refresh_tableCon();
 }
 
 void MainWindow::on_pb_delTable_clicked()
