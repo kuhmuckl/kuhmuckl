@@ -189,7 +189,9 @@ void MainWindow::load_Table(int nb)
             germanFilter.append(l[i]);
 
         ui->lw_Filter->addItem(germanFilter);
+
     }
+    ui->cob_Order->setCurrentIndex(ui->cob_Order->findText(session->colTrans[session->order].mid(1,session->colTrans[session->order].length()-2)));
 }
 
 void MainWindow::refresh_tableCon()
